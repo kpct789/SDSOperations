@@ -1,0 +1,130 @@
+body{
+    background-color: #5A6778;
+    font-family: Ubuntu;
+}
+#container{
+    background-color: #EEEFF1;
+    /*width: 500px;
+    max-height: 250px;
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+    margin-left: -250px;
+    margin-top: -125px;
+    z-index: 10000px;*/
+    box-shadow: 3px 3px 2px 0px #505050;
+}
+.inputtext{
+    border: 0px;
+    background-color: #F6F6F6;
+    border-bottom: 2px solid #D4D4D4;
+    width: 100%;
+    outline: none;
+    padding: 10px;
+    /* For Safari 3.0+ */
+    -webkit-transition-property: border, background;
+    -webkit-transition-duration: .9s, .9s;
+    -webkit-animation: ease-in-out;
+    /* Standard syntax */
+    transition-property: border, background;
+    transition-duration: .9s, .9s;
+    animation: ease-in-out;
+    resize: none;
+}
+.inputtext:focus {
+    border-bottom: 2px solid #e74c3c; /* f8646e, 56caca */
+    background-color: #fff;
+}
+.input-group-addon{
+    border: 0;
+    border-bottom: 2px solid #D4D4D4;
+    border-radius: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    /* Remove #eee with White when you want to display content background color as enabled */
+    background-color: #eaeaea;
+    min-width: 45px;
+}
+.btn-custom {
+    border-radius: 3px;
+    border: none;
+    background-color: #1BBC9B;
+    color: white;
+    vertical-align: middle;
+    width: 100%;
+    outline: none;
+    padding: 6px;
+    /*box-shadow: 1px 1px 5px #f0030f;*/
+    border-bottom: 3px solid #16997E;
+    font-weight: bold;
+    font-size: 15px;
+    text-shadow: 1px 1px 2px #9D9C9C;
+}
+.btn-custom:hover{
+    color: white;
+}
+.btn-custom-icon {
+    border-radius: 3px;
+    border: none;
+    background-color: #BDC3C7;
+    color: #000;
+    vertical-align: middle;
+    width: 100%;
+    outline: none;
+    padding: 6px;
+    /*box-shadow: 1px 1px 5px #f0030f;*/
+    /*border-bottom: 3px solid #16997E;*/
+    font-weight: bold;
+    font-size: 15px;
+    text-shadow: 1px 1px 2px #9D9C9C;
+}
+.fa{
+    /*text-shadow: 2px 1px 2px #787878;*/
+}
+::-webkit-input-placeholder {
+    color: #CCCACA;
+    text-transform: uppercase;
+}
+:-moz-placeholder { /* Firefox 18- */
+    color: #CCCACA;
+    text-transform: uppercase;
+}
+::-moz-placeholder {  /* Firefox 19+ */
+    color: #CCCACA;
+    text-transform: uppercase;
+}
+:-ms-input-placeholder {
+    color: #CCCACA;
+    text-transform: uppercase;
+}
+::-webkit-scrollbar {
+    width: 5px;
+}
+::-webkit-scrollbar-track {
+    background-color: #eaeaea;
+    border-left: 0px solid #ccc;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: #aaa;
+}
+.Absolute-Center {
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+.Absolute-Center.is-Responsive {
+    width: 90%;
+    height: 300px;
+    min-width: 200px;
+    max-width: 500px;
+    padding: 50px;
+}

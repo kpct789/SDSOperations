@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Tally Sheet</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.css">
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Ubuntu">
+    </head>
+    <body>
+        <div id="loading" class="loading">Loading&#8230;</div>
+        <div id="sidebar"></div>
+        <div id="header1" class="headerbar">
+            <table style="background: transparent; width: 100%;">
+                <tr>
+                    <td class="topbar-icon text-left"><i id="home" class="fa fa-home fa-2x" aria-hidden="true"></i></td>
+                    <td class="text-center"><span class="headertext">KRISHNAPATNAM PORT</span></td>
+                    <td class="topbar-icon text-right"><a href="login.html"><i class="fa fa-sign-out fa-2x" aria-hidden="true"></i></a></td>
+                </tr>
+            </table>
+        </div>
+        <br>
+        <br>
+        <div class="container">
+            <div class="page-header text-left">
+                <label class="header">Tally Sheet</label>
+            </div>
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-lg-2 col-md-2 col-sm-2 col-xs-2" for="txttruckno">Truck No.</label>
+                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                        <input type="text" id="txttruckno" class="inputtext-readonly" readonly style="text-transform: uppercase;">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 col-md-2 col-sm-2 col-xs-2">OP Loc.</label>
+                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                        <select id="selloc" class="inputtext"></select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Cargo Cond.</label>
+                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                        <select id="selcargo" class="inputtext"></select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Weather Cond.</label>
+                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                        <select id="selweather" class="inputtext"></select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Handling Comp.</label>
+                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                        <select id="selhndcomp" class="inputtext"></select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Handling Type</label>
+                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                        <select id="selhndtype" class="inputtext">
+                            <option value="0">Select</option>
+                            <option value="1">Manual</option>
+                            <option value="2">Equipment</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12 text-center">
+                        <span id="add"><i class="fa fa-plus-circle fa-2x" style="color: #5cb85c;" aria-hidden="true"></i></span>
+                    </div>
+                </div>
+                <div class="form-group text-center">
+                    <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12 text-center">
+                        <table id="tbldata" class="table table-condensed text-center"></table>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12 text-center">
+                        <button type="button" id="btnSubmit" class="btn btn-custom"><i class="fa fa-check" aria-hidden="true"></i> <span> Submit</span></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <input type="hidden" id="hidusrid">
+        <input type="hidden" id="hidtrkid">
+        <input type="hidden" id="hidloctype">
+    </body>
+</html>
+<script type="text/javascript" src="js/jquery1.11.1-min.js"></script>
+<script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+<script type="text/javascript" src="js/tallysheet.js"></script>

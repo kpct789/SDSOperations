@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <title>SDS</title>
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <link rel="stylesheet" type="text/css" href="css/loading.css">
+        <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.css">
+        <link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Ubuntu'>
+        <style type="text/css">
+            body{
+                font-family: Ubuntu, Consolas;
+            }
+            .content {
+                border-radius: 5px;
+                /*border: 1px solid #c9c9c9;*/
+                padding: 10px;
+                height: 400px;
+                width: 100%;
+                overflow: auto;
+                background-color: #fff;
+            }
+            .readonly-active{
+                background: #fff;
+                border-bottom: 1px solid #808080;
+                border: 0px;
+                border-radius: 0;
+                outline: none;
+            }
+            #imgtruck {
+                animation: blink 1s;
+                animation-iteration-count: infinite;
+            }
+            @keyframes blink {
+                0% {
+                    opacity: 1;
+                }
+
+                50% {
+                    opacity: 0;
+                }
+
+                100% {
+                    opacity: 1;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div id="loading" class="loading">Loading&#8230;</div>
+        <div id="sidebar"></div>
+        <div id="header1" class="headerbar">
+            <!--<img alt="logo" class="imglogo" src="img/logo.png"><br>
+            <strong><span class="headertext">KRISHNAPATNAM PORT</span></strong>-->
+            <table style="background: transparent; width: 100%;">
+                <tr>
+                    <td class="topbar-icon text-left"><i id="home" class="fa fa-home fa-2x" aria-hidden="true"></i></td>
+                    <td class="text-center"><span class="headertext">KRISHNAPATNAM PORT</span></td>
+                    <td class="topbar-icon text-right"><a href="login.html"><i class="fa fa-sign-out fa-2x" aria-hidden="true"></i></a></td>
+                </tr>
+            </table>
+        </div>
+        <br>
+        <br>
+        <div class="container">
+            <br>
+            <br>
+            <div class="row">
+                <div class="col-lg-2 text-left">
+                    <label class="control-label">Truck No</label>
+                </div>
+                <div class="col-lg-8 text-center">
+                    <div class="input-group">
+                        <input type="text" id="txttruckno" class="inputtext" style="text-transform: uppercase;" placeholder="Enter or Scan Truck No">
+                        <span id="imgScan" class="input-group-addon">
+                            <!--<img alt="scan" src="img/scan.PNG" width="25px" height="25px" />-->
+                            <i class="fa fa-qrcode fa-lg" aria-hidden="true" style="color: #686868"></i>
+                        </span>
+                        <span id="imgSearch" class="input-group-addon">
+                            <!--<img alt="Search" src="img/search.PNG" width="20px" height="23px" style="cursor: pointer;" />-->
+                            <i class="fa fa-search fa-lg" aria-hidden="true" style="color: #686868"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-lg-2 text-left"></div>
+            </div>
+            <div class="row">
+                <div class="col-lg-2 text-left"></div>
+                <div class="col-lg-8 text-left">
+                    <label id="txtstatus" class="text-success"></label>
+                </div>
+                <div class="col-lg-2 text-left"></div>
+            </div>
+            <div class="row">
+                <div class="col-lg-2 text-left"></div>
+                <div class="col-lg-8"><br>
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-lg-3" for="txtparty">Party Name</label>
+                            <div class="col-lg-9">
+                                <input type="text" id="txtparty" readonly="readonly" class="inputtext-readonly">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3" for="txtloc">Planned Location</label>
+                            <div class="col-lg-9">
+                                <input type="text" id="txtloc" readonly="readonly" class="inputtext-readonly">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3" for="txtcargo">Cargo</label>
+                            <div class="col-lg-9">
+                                <input type="text" id="txtcargo" readonly="readonly" class="inputtext-readonly">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3" for="txtqty">Qty</label>
+                            <div class="col-lg-9">
+                                <input type="text" id="txtqty" readonly="readonly" class="inputtext-readonly">
+                            </div>
+                        </div>
+                        <div class="form-group" id="divType" style="display: none;">
+                            <label class="col-lg-3" for="txtloctype">Location Type</label>
+                            <div class="col-lg-9">
+                                <input type="text" id="txtloctype" readonly="readonly" class="inputtext-readonly">
+                            </div>
+                        </div>
+                        <div class="form-group" id="divLoc">
+                            <label class="col-lg-3" for="txtactloc">Actual Location</label>
+                            <div class="col-lg-9">
+                                <!--<select id="selLocation" class="inputtext"></select>-->
+                                <input type="text" id="txtactloc" readonly="readonly" class="inputtext-readonly">
+                            </div>
+                        </div>
+                        <div class="form-group" id="divReason">
+                            <label class="col-lg-3" for="selReason">Reason</label>
+                            <div class="col-lg-9">
+                                <select id="selReason" class="inputtext"></select>
+                            </div>
+                        </div>
+                        <div class="form-group" id="divRemarks">
+                            <label class="col-lg-3" for="txtremarks">Remarks</label>
+                            <div class="col-lg-9">
+                                <textarea id="txtremarks" class="inputtext" rows="5" placeholder="Enter Remarks"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group text-center">
+                            <div class="col-lg-12">
+                                <button type="button" id="btnSubmit" class="btn btn-custom"><i class="fa fa-check"></i> Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-lg-2 text-left"></div>
+            </div>
+        </div>
+        <input type="hidden" id="hidTruckId">
+        <input type="hidden" id="hidStatusId">
+        <input type="hidden" id="hidusrid">
+        <input type="hidden" id="hidimei" value="355666056403784">
+        <input type="hidden" id="hiduuid" value="69db5786cbc164">
+        <input type="hidden" id="hidfrstflag">
+        <input type="hidden" id="hidprkngflag">
+        <input type="hidden" id="hidscndflag">
+        <input type="hidden" id="hidactlogflag">
+        <input type="hidden" id="hidsdsoutflag">
+        <input type="hidden" id="hidkpctoutflag">
+        <input type="hidden" id="hidfnlflag">
+        <input type="hidden" id="hidloc">
+    </body>
+</html>
+<script type="text/javascript" src="js/jquery1.11.1-min.js"></script>
+<script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+<script type="text/javascript" src="js/jquery.serialize-object.min.js"></script>
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript">
+    var qsParm = new Array();
+    document.addEventListener("deviceready", onDeviceReady, false);
+
+    function onDeviceReady() {
+        $("#hiduuid").val(device.uuid);
+        window.plugins.imeiplugin.getImei(callback);
+    }
+    function callback(imei) {
+        $("#hidimei").val(imei);
+    }
+    function qs() {
+        var query = window.location.search.substring(1);
+        var parms = query.split('&');
+        for (var i = 0; i < parms.length; i++) {
+            var pos = parms[i].indexOf('=');
+            if (pos > 0) {
+                var key = parms[i].substring(0, pos);
+                var val = parms[i].substring(pos + 1);
+                qsParm[key] = val;
+            }
+        }
+
+        if (parms.length == 1 && query != "") {
+            $("#hidusrid").val(atob(qsParm["user"]));
+            return true;
+        }
+        else if(parms.length > 1) {
+            $("#hidusrid").val(atob(qsParm["user"]));
+            $("#txttruckno").val(atob(qsParm["trkno"]));
+            $("#txtqty").val(atob(qsParm["qty"]));
+            $("#hidloc").val(atob(qsParm["loc"]));
+            $("#btnSubmit").html("<i class='fa fa-check'></i> Submit");
+            $("#btnSubmit").attr('disabled', false);
+            $("#btnSubmit").attr('class', 'btn btn-custom');
+            return true;
+        }
+        else {
+            window.location.href = 'Login.html';
+            return false;
+        }
+    }
+    $(document).ready(function () {
+        $("#imgtruck").hide();
+        $("#loading").hide();
+        //$("#divType").hide();
+        //$("#divLoc").hide();
+        $("#btnSubmit").hide();
+        $("#txttruckno").focus();
+        $("#selLocation").prop('disabled', true);
+        qs();
+        GetDeviceStatus();
+        GetTruckDetails($("#txttruckno").val().trim());
+        Reason();
+        $("#home").click(function () {
+            window.location.href = 'default.html?user=' + btoa($("#hidusrid").val()) + '';
+        });
+
+        $("#imgSearch").click(function () {
+            //debugger;
+            $("#loading").show();
+            $("#imgtruck").hide();
+            $("#txtparty").val("");
+            $("#txtloc").val("");
+            $("#txtcargo").val("");
+            $("#txtqty").val("");
+            $("#hidTruckId").val("");
+            $("#hidStatusId").val("");
+            $("#txtstatus").text("");
+            /*if ($("#txttruckno").val() == "") {
+                alert('Please Enter Truck No.');
+                $("#loading").hide();
+                $("#txttruckno").focus();
+                return false;
+            }*/
+            GetDeviceStatus();
+            GetTruckDetails($("#txttruckno").val().trim());
+            Reason();
+            $("#loading").hide();
+        });
+
+        $("#imgScan").click(function () {
+            $("#txtparty").val("");
+            $("#txtloc").val("");
+            $("#txtcargo").val("");
+            $("#txtqty").val("");
+            $("#hidTruckId").val("");
+            $("#hidStatusId").val("");
+            $("#txtstatus").text("");
+            $("#imgtruck").hide();
+            scan();
+        });
+
+        $("#selReason").change(function (){
+            var str = "";
+            $("#selReason option:selected").each(function () {
+                str += $(this).text().trim();
+            });
+            if(str != "--Select--" && str == "OTHER"){
+                $("#txtremarks").focus();
+            }
+        });
+
+        $("#btnSubmit").click(function (){
+            var $btn = $("#btnSubmit");
+            debugger;
+            /*if(LocationValidations() == false)
+            {
+                return false;
+            }
+            else*/ if($("#hidStatusId").val() == 5)
+            {
+                window.location.href = 'TallySheet.html?user=' + btoa($("#hidusrid").val()) + '&trkid=' + btoa($("#hidTruckId").val()) + '&trkno=' + btoa($("#txttruckno").val().trim()) + '&loctype=' + btoa($("#txtloctype").val()) + '';
+            }
+            else if(RemarksValidations() == false)
+            {
+                return false;
+            }
+            else
+            {
+                $btn.html("<i class='fa fa-spinner fa-spin'></i>data is submitting please wait...");
+                $btn.attr('disabled', true);
+                $btn.attr('class', 'btn btn-custom-icon');
+                var locType = $("#txtloctype").val();
+                var loc = $("#hidloc").val();
+                /*$("#selLocation option:selected").each(function () {
+                    loc += $(this).val().trim();
+                });*/
+                var reason = "";
+                $("#selReason option:selected").each(function () {
+                    reason += $(this).val().trim();
+                });
+
+                var Adddata = {};
+                Adddata.TruckNo = $("#txttruckno").val();
+                Adddata.LocationName = loc;
+                Adddata.LocationType = locType;
+                Adddata.Qty = $("#txtqty").val();
+                Adddata.ReasonId = reason;
+                Adddata.Remarks = $("#txtremarks").val();
+                Adddata.User = $("#hidusrid").val();
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://61.0.225.169/KPCTApi/api/TruckDetails/AddData',
+                    dataType: "json",
+                    data: Adddata,
+                    success: function (result) {
+                        window.location.href = 'SDS.html?user=' + btoa($("#hidusrid").val());
+                    },
+                    error: function () {
+                        alert('Error occurred while saving the data.');
+                        $btn.html("<i class='fa fa-check'></i> Submit");
+                        $btn.attr('disabled', false);
+                        $btn.attr('class', 'btn btn-custom-icon');
+                    }
+                });
+            }
+        });
+    });
+
+    function GetTruckDetails(truckno)
+    {
+        var trkno = truckno == "" ? "" : truckno;
+        if(trkno != "")
+        {
+            $.ajax({
+                url: 'http://61.0.225.169/KPCTApi/api/TruckDetails/GetTruckDetails/' + trkno,
+                type: 'GET',
+                data: '{}',
+                dataType: 'json',
+                async: false,
+                success: function (result) {
+                    if (result.length > 0) {
+                        $("#txtparty").val(result[0].Party);
+                        $("#txtloc").val(result[0].Loc);
+                        $("#txtactloc").val(result[0].ActualLocId);
+                        $("#txtcargo").val(result[0].Cargo);
+                        $("#txtqty").val(result[0].Qty);
+                        $("#txtstatus").text(result[0].Status);
+                        $("#hidTruckId").val(result[0].TruckId);
+                        $("#hidStatusId").val(result[0].StatusId);
+                        $("#hidfrstflag").val(result[0].FirstTransit_Flag);
+                        $("#hidprkngflag").val(result[0].DBParking_Flag);
+                        $("#hidscndflag").val(result[0].SecondTransit_Flag);
+                        $("#hidactlogflag").val(result[0].ActivityLoc_Flag);
+                        $("#hidsdsoutflag").val(result[0].SDSOut_Flag);
+                        $("#hidkpctoutflag").val(result[0].KPCTOut_Flag);
+                        $("#hidfnlflag").val(result[0].FinalTransit_Flag);
+                        $("#txtstatus").attr('class', 'text-success');
+                        $("#btnSubmit").show();
+                        /*$("#btnSubmit").html("<i class='fa fa-check'></i> " + result[0].NextStatus);*/
+                        $("#hidtrkstatus").val(result[0].NextStatus);
+                        $("#btnSubmit").attr('disabled', false);
+                        $("#btnSubmit").attr('class', 'btn btn-custom');
+                        if($("#hidStatusId").val() == 5)
+                            $("#btnSubmit").html("<i class='fa fa-check'></i> Tally Sheet");
+                        else
+                            $("#btnSubmit").html("<i class='fa fa-check'></i> " + result[0].NextStatus);
+                        ShowObjects();
+                        DisableButton(result[0].NextStatus);
+                    }
+                    else {
+                        $("#txtstatus").text("No Data Found");
+                        $("#txtstatus").attr('class', 'text-danger');
+                    }
+                },
+                error: function () {
+                    alert('Error occurred while loading Truck details.');
+                    $("#imgtruck").hide();
+                    $("#loading").hide();
+                }
+            });
+        }
+    }
+
+    function Reason()
+    {
+        $("#selReason").empty();
+        $.ajax({
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            url: 'http://61.0.225.169/KPCTApi/api/Reason/GetReasons',
+            dataType: "json",
+            data: '{}',
+            async: false,
+            success: function (locresult) {
+                $.each(locresult, function (key, value) {
+                    $("#selReason").append($("<option></option>").val(value.ReasonId).html(value.Reason));
+                });
+            },
+            error: function () {
+                alert("Error occurred while loading Reasons.");
+            }
+        });
+    }
+
+    function GetDeviceStatus()
+    {
+        var Adddata = {};
+        Adddata.IMEI = $("#hidimei").val();
+        Adddata.UUID = $("#hiduuid").val();
+        $.ajax({
+            type: "POST",
+            url: 'http://61.0.225.169/KPCTApi/api/Account/GetDeviceStatus',
+            dataType: "json",
+            data: Adddata,
+            async: false,
+            success: function (result) {
+                $("#txtloctype").val(result);
+                /*if (result != null) {
+                    $("#selLocation").empty();
+                    $("#selLocation").append($("<option>--Select--</option>"));
+                    $.ajax({
+                        type: "GET",
+                        contentType: "application/json; charset=utf-8",
+                        url: 'http://61.0.225.169/KPCTApi/api/Location/GetLocation/' + result,
+                        dataType: "json",
+                        data: '{}',
+                        async: false,
+                        success: function (locresult) {
+                            $.each(locresult, function (key, value) {
+                                $("#selLocation").append($("<option></option>").val(value.Id).html(value.Name));
+                            });
+                        },
+                        error: function () {
+                            alert('Error occurred  while loading Location Types.');
+                        }
+                    });
+                }*/
+            },
+            error: function () {
+                alert("Error occurred while getting device details.");
+            }
+        });
+    }
+
+    function ShowObjects()
+    {
+        //$("#selLocation").empty();
+        //$("#selLocation").append($("<option>Select</option>"));
+        if($("#hidStatusId").val() == 5)
+        {
+            $("#divType").show();
+            $("#divLoc").show();
+            /*$.ajax({
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                url: 'http://61.0.225.169/KPCTApi/api/TruckDetails/GetLocationType',
+                dataType: "json",
+                data: '{}',
+                async: false,
+                success: function (loctyperesult) {
+                    $("#txtloctype").val(value.LocationType);
+                },
+                error: function (result) {
+                    alert(result.message + "::Error");
+                }
+            });*/
+        }
+        else{
+            //$("#divType").hide();
+            //$("#divLoc").hide();
+        }
+    }
+
+    function DisableButton(obj)
+    {
+        if(obj == 'SDS ACK IN' || obj == 'SDS-OUT ACK' || obj == 'EXIT') {/* || obj == 'FINAL TRANSIT'*/
+            $("#btnSubmit").prop('disabled', true);
+        }
+        /*else if (obj == 'WH-ACTIVITY START' || obj == 'CT-YARD IN') {
+            $("#selLocation").prop('disabled', false);
+        }*/
+        else {
+            $("#btnSubmit").prop('disabled', false);
+            $("#selLocation").prop('disabled', true);
+        }
+    }
+
+    function scan()
+    {
+        cordova.plugins.barcodeScanner.scan(
+            function (result) {
+                if (!result.cancelled) {
+                    $("#txttruckno").val(result.text);
+                }
+            },
+            function (error) {
+                alert("Scanning failed: " + error);
+            }
+        );
+    }
+
+    function LocationValidations()
+    {
+        if($("#hidStatusId").val() == 4)
+        {
+            var loc = "";
+            $("#selLocation option:selected").each(function () {
+                loc += $(this).text().trim();
+            });
+
+            if(loc == "--Select--")
+            {
+                alert('Please Select Location');
+                $("#selLocation").focus();
+                return false;
+            }
+        }
+        return true;
+    }
+
+    function RemarksValidations()
+    {
+        var reason = "";
+        $("#selReason option:selected").each(function () {
+            reason += $(this).text().trim();
+        });
+        if(($("#hidStatusId").val() == 1 && ($("#hidfrstflag").val() == 'C' || $("#hidfrstflag").val() == 'W'))
+         ||($("#hidStatusId").val() == 2 && ($("#hidprkngflag").val() == 'C' || $("#hidprkngflag").val() == 'W'))
+         ||($("#hidStatusId").val() == 3 && ($("#hidscndflag").val() == 'C' || $("#hidscndflag").val() == 'W'))
+         ||($("#hidStatusId").val() == 4 && ($("#hidactlogflag").val() == 'C' || $("#hidactlogflag").val() == 'W'))
+         ||($("#hidStatusId").val() == 5 && ($("#hidsdsoutflag").val() == 'C' || $("#hidsdsoutflag").val() == 'W'))
+         ||($("#hidStatusId").val() == 6 && ($("#hidkpctoutflag").val() == 'C' || $("#hidkpctoutflag").val() == 'W'))
+         ||($("#hidStatusId").val() == 7 && ($("#hidfnlflag").val() == 'C' || $("#hidfnlflag").val() == 'W')))
+        {
+            if(reason == "--Select--")
+            {
+                alert('Please Select Reason');
+                $("#selReason").focus();
+                return false;
+            }
+        }
+
+        if(reason == "OTHER")
+        {
+            if($("#txtremarks").val()=="")
+            {
+                alert('Enter Remarks');
+                $("#txtremarks").focus();
+                return false;
+            }
+        }
+
+        return true;
+    }
+</script>
