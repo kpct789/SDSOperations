@@ -30,6 +30,7 @@
 body {
     /*margin-top: 65px;*/
     font-family: 'Ubuntu', sans-serif;
+    font-size: 13px;
 }
 
 label {
@@ -145,7 +146,7 @@ input[type="button"]:focus{
     background-color: transparent;
     border: none;
     border-bottom: 2px solid #e1e1e1;
-    font-size: 15px;
+    font-size: 13px;
     font-family: 'Ubuntu', sans-serif;
     width: 100%;
     padding: 10px;
@@ -169,7 +170,7 @@ input[type="button"]:focus{
     background-color: transparent;
     border: none;
     border-bottom: 1px solid #e1e1e1;
-    font-size: 15px;
+    font-size: 13px;
     font-family: 'Ubuntu', sans-serif;
     width: 100%;
     padding: 3px;
@@ -194,7 +195,7 @@ input[type="button"]:focus{
     background-color: transparent;
     border: none;
     border-bottom: 1px solid #e1e1e1;
-    font-size: 15px;
+    font-size: 13px;
     font-family: 'Ubuntu', sans-serif;
     width: 100%;
     padding: 10px;
@@ -206,7 +207,7 @@ input[type="button"]:focus{
     background-color: transparent;
     border: none;
     border-bottom: 1px solid #e1e1e1;
-    font-size: 15px;
+    font-size: 13px;
     font-family: 'Ubuntu', sans-serif;
     width: 100%;
     padding: 3px;
@@ -295,7 +296,7 @@ input[type="button"]:focus{
 }
 
 .ui-datepicker {
-    font-size: 12px;
+    font-size: 13px;
 }
 .ui-widget-header .ui-icon {
     background-image: url(../images/ui-icons_228ef1_256x240.png);
@@ -312,22 +313,22 @@ input[type="button"]:focus{
 
 ::-webkit-input-placeholder {
     color: #bdbdbd;
-    font-size: 12px;
+    font-size: 13px;
     text-transform: uppercase;
 }
 :-moz-placeholder { /* Firefox 18- */
     color: #bdbdbd;
-    font-size: 12px;
+    font-size: 13px;
     text-transform: uppercase;
 }
 ::-moz-placeholder {  /* Firefox 19+ */
     color: #bdbdbd;
-    font-size: 12px;
+    font-size: 13px;
     text-transform: uppercase;
 }
 :-ms-input-placeholder {
     color: #bdbdbd;
-    font-size: 12px;
+    font-size: 13px;
     text-transform: uppercase;
 }
 

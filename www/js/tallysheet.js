@@ -123,7 +123,6 @@ $(document).ready(function (){
             var Adddata = [];
             $("#tbldata tbody tr").each(function () {
                 var t = $(this).find('td:eq(5)').find("input").val();
-                debugger;
                 if($.isNumeric(t) && Math.abs(t) > 0)
                 {
                     var obj = {
@@ -136,6 +135,7 @@ $(document).ready(function (){
                         HandledCompany : hndledcomp,
                         Qty : total,
                         Location : loc,
+                        LocationType : $("#hidloctype").val(),
                         User : $("#hidusrid").val()
                     };
                     Adddata.push(obj);
@@ -203,7 +203,7 @@ function GetLocations()
     $.ajax({
         type: "GET",
         contentType: "application/json; charset=utf-8",
-        url: 'http://61.0.225.169/KPCTApi/api/Location/GetLocation/1',
+        url: 'http://61.0.225.169/KPCTApi/api/Location/GetLocation/' + $("#hidloctype").val(),
         dataType: "json",
         data: '{}',
         async: false,
