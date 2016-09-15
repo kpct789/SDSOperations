@@ -89,7 +89,8 @@
             <div class="row">
                 <div class="col-lg-2 text-left"></div>
                 <div class="col-lg-8 text-left">
-                    <label id="txtstatus" class="text-success"></label>
+                    <label id="txtstatus" class="text-success"></label><br>
+                    <label class="text-danger" id="lblerr"></label>
                 </div>
                 <div class="col-lg-2 text-left"></div>
             </div>
@@ -355,7 +356,7 @@
                     if (result.length > 0) {
                         $("#txtparty").val(result[0].Party);
                         $("#txtloc").val(result[0].Loc);
-                        $("#txtactloc").val(result[0].ActualLocId);
+                        $("#txtactloc").val(result[0].ActualLocation);
                         $("#txtcargo").val(result[0].Cargo);
                         $("#txtqty").val(result[0].Qty);
                         $("#txtstatus").text(result[0].Status);
@@ -382,7 +383,7 @@
                         else
                             $("#btnSubmit").html("<i class='fa fa-check'></i> " + result[0].NextStatus);
                         ShowObjects();
-                        DisableButton(result[0].NextStatus);
+                        DisableButton(result[0].NextStatus, result[0].LocType, $("#hidloctype").val());
                     }
                     else {
                         $("#txtstatus").text("No Data Found");
@@ -496,14 +497,23 @@
         }
     }
 
-    function DisableButton(obj)
+    function DisableButton(obj, plocid, alocid)
     {
+        $("#lblerr").html();
         if(obj == 'SDS ACK IN' || obj == 'SDS-OUT ACK' || obj == 'EXIT') {/* || obj == 'FINAL TRANSIT'*/
             $("#btnSubmit").prop('disabled', true);
         }
         /*else if (obj == 'WH-ACTIVITY START' || obj == 'CT-YARD IN') {
             $("#selLocation").prop('disabled', false);
         }*/
+        else if(plocid > 0 && plocid != alocid)
+        {
+            $("#btnSubmit").prop('disabled', true);
+            if(alocid == 1)
+                $("#lblerr").html('Planned Loation is in Yard. Device is registered for WareHouse. Pleace Check.');
+            else if(alocid == 2)
+                $("#lblerr").html('Planned Location is in WareHouse. Device is registered for Yard. Pleace Check.');
+        }
         else {
             $("#btnSubmit").prop('disabled', false);
             $("#selLocation").prop('disabled', true);
