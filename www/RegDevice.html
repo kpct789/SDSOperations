@@ -90,6 +90,8 @@
                             <div class="col-lg-10">
                                 <select id="selLocType" class="inputtext-readonly">
                                     <option value="0" selected>Select</option>
+                                    <option value="1">WareHouse</option>
+                                    <option value="2">Yard</option>
                                 </select>
                             </div>
                         </div>
@@ -144,7 +146,7 @@
     $(document).ready(function () {
         $("#loading").hide();
         qs();
-        GetDeviceStatus();
+        //GetDeviceStatus();
 
         $("#home").click(function () {
             window.location.href = 'default.html?user=' + btoa($("#hidusrid").val()) + '';
@@ -171,12 +173,10 @@
                     data: Adddata,
                     success: function (loctyperesult) {
                         alert('Device Registered Successfully');
-                        $("#btnSubmit").prop('disabled', true);
-                        $("#btnSubmit").html("Device Registered.");
                     },
-                    error: function (result) {
+                    error: function () {
                         $("#btnSubmit").prop('disabled', false);
-                        alert(result.message);
+                        alert('Error Occurred while registring device.');
                     }
                 });
             }
