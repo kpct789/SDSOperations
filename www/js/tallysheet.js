@@ -2,15 +2,14 @@ var qsParm = new Array();
 $(document).ready(function (){
     $("#loading").hide();
     $("#btnSubmit").hide();
+    $("#home").click(function () {
+        window.location.href = 'default.html?user=' + btoa($("#hidusrid").val()) + '';
+    });
     qs();
     GetCargoCondition();
     GetWeatherCondition();
     GetHandledCompany();
     GetLocations();
-
-    $("#home").click(function () {
-        window.location.href = 'default.html?user=' + btoa($("#hidusrid").val()) + '';
-    });
 
     $("#add").click(function(){
         var headrowCount = $("#tbldata thead tr").length;
