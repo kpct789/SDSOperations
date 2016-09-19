@@ -279,24 +279,25 @@ function ShowObjects()
 function DisableButton(obj, plocid, alocid)
 {
     $("#lblerr").html();
+    $("#btnSubmit").prop('disabled', false);
     if(obj == 'SDS ACK IN' || obj == 'SDS-OUT ACK' || obj == 'EXIT') {/* || obj == 'FINAL TRANSIT'*/
         $("#btnSubmit").prop('disabled', true);
     }
     /*else if (obj == 'WH-ACTIVITY START' || obj == 'CT-YARD IN') {
         $("#selLocation").prop('disabled', false);
     }*/
-    else if(plocid > 0 && plocid != alocid)
+    else {
+        $("#selLocation").prop('disabled', true);
+    }
+
+    /*if(plocid > 0 && plocid != alocid)
     {
         $("#btnSubmit").prop('disabled', true);
         if(alocid == 1)
             $("#lblerr").html('Planned Loation is in Yard. Device is registered for WareHouse. Pleace Check.');
         else if(alocid == 2)
             $("#lblerr").html('Planned Location is in WareHouse. Device is registered for Yard. Pleace Check.');
-    }
-    else {
-        $("#btnSubmit").prop('disabled', false);
-        $("#selLocation").prop('disabled', true);
-    }
+    }*/
 }
 
 function scan()

@@ -1,0 +1,115 @@
+var qsParm = new Array();
+document.addEventListener("deviceready", onDeviceReady, false);
+
+function onDeviceReady() {
+    $("#txtuuid").val(device.uuid);
+    window.plugins.imeiplugin.getImei(callback);
+}
+function callback(imei) {
+    $("#txtimei").val(imei);
+}
+
+function qs() {
+    var query = window.location.search.substring(1);
+    var parms = query.split('&');
+    for (var i = 0; i < parms.length; i++) {
+        var pos = parms[i].indexOf('=');
+        if (pos > 0) {
+            var key = parms[i].substring(0, pos);
+            var val = parms[i].substring(pos + 1);
+            qsParm[key] = val;
+        }
+    }
+    if (parms.length > 0) {
+        $("#hidusrid").val(atob(qsParm["user"]));
+        return true;
+    }
+    else {
+        window.location.href = 'Login.html';
+        return false;
+    }
+}
+$(document).ready(function () {
+    $("#loading").hide();
+    qs();
+    //GetDeviceStatus();
+
+    $("#home").click(function () {
+        window.location.href = 'default.html?user=' + btoa($("#hidusrid").val()) + '';
+    });
+
+    $("#btnSubmit").click(function (){
+        var _loctype = $("#selLocType option:selected").val();
+        if(_loctype == 0) {
+            $("#selLocType").focus();
+            alert('Please Select Location Type.');
+            return false;
+        }
+        else {
+            $("#loading").show();
+            var Adddata = {};
+            Adddata.IMEI = $("#txtimei").val();
+            Adddata.UUID = $("#txtuuid").val();
+            Adddata.LocationType = _loctype;
+            Adddata.User = 'admin';
+            $.ajax({
+                type: 'POST',
+                url: 'http://61.0.225.169/KPCTApi/api/Account/RegisterDevice',
+                dataType: "json",
+                data: Adddata,
+                success: function (loctyperesult) {
+                    alert('Device Registered Successfully');
+                },
+                error: function () {
+                    $("#btnSubmit").prop('disabled', false);
+                    alert('Error Occurred while Registring device.');
+                }
+            });
+        }
+        $("#loading").hide();
+    });
+});
+
+function GetDeviceStatus(){
+    var Adddata = {};
+    Adddata.IMEI = $("#txtimei").val();
+    Adddata.UUID = $("#txtuuid").val();
+    $.ajax({
+        type: "POST",
+        url: "http://61.0.225.169/KPCTApi/api/Account/GetDeviceStatus",
+        dataType: "json",
+        data: Adddata,
+        success: function (result) {
+            $("#selLocType").empty();
+            if (result != null) {
+                $("#selLocType").append($("<option></option>").val(result).html(result));
+                $("#btnSubmit").prop('disabled', true);
+                $("#btnSubmit").html("Device already Registered.");
+            }
+            else {
+                $("#btnSubmit").prop('disabled', false);
+                $.ajax({
+                    type: "GET",
+                    contentType: "application/json; charset=utf-8",
+                    url: 'http://61.0.225.169/KPCTApi/api/Location/GetLocationType/',
+                    dataType: "json",
+                    data: '{}',
+                    async: false,
+                    success: function (loctyperesult) {
+                        $("#selLocType").append($("<option></option>").val('0').html('Select'));
+                        $("#selLocType").append($("<option></option>").val('PARKING').html('PARKING'));
+                        $.each(loctyperesult, function (key, value) {
+                            $("#selLocType").append($("<option></option>").val(value.LocationType).html(value.LocationType));
+                        });
+                    },
+                    error: function () {
+                        alert('Error Occurred while getting Device Status');
+                    }
+                });
+            }
+        },
+        error: function () {
+            alert('Error Occurred while getting Device Status');
+        }
+    });
+}
