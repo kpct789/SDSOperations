@@ -190,7 +190,7 @@
         Adddata.UUID = $("#txtuuid").val();
         $.ajax({
             type: "POST",
-            url: 'http://61.0.225.169/KPCTApi/api/Account/GetDeviceStatus',
+            url: "http://61.0.225.169/KPCTApi/api/Account/GetDeviceStatus",
             dataType: "json",
             data: Adddata,
             success: function (result) {
