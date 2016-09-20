@@ -46,6 +46,10 @@ $(document).ready(function () {
             return false;
         }
         else {
+            $(this).find("i.fa").attr('class', 'fa fa-spinner fa-spin fa-lg');
+            $(this).find("span").text("logging in please wait...");
+            $(this).attr('disabled', true);
+            $(this).attr('class', 'btn btn-custom-icon');
             $("#loading").show();
             var Adddata = {};
             Adddata.IMEI = $("#txtimei").val();
@@ -66,6 +70,10 @@ $(document).ready(function () {
                 }
             });
         }
+        $(this).find("i.fa").attr('class', 'fa fa-sign-in fa-lg');
+        $(this).find("span").text("Login");
+        $(this).attr('disabled', false);
+        $(this).attr('class', 'btn btn-custom');
         $("#loading").hide();
     });
 });
