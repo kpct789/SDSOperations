@@ -305,6 +305,9 @@ function DisableButton(obj, plocid, alocid)
         else if(alocid == 2)
             $("#lblerr").html('Planned Location is in WareHouse. Device is registered for Yard. Pleace Check.');
     }*/
+
+    if(alocid == 3)
+        $("#btnSubmit").prop('disabled', true);
 }
 
 function scan()
