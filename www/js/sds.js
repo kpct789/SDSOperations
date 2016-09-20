@@ -285,6 +285,7 @@ function ShowObjects()
 
 function DisableButton(obj, plocid, alocid)
 {
+    debugger;
     $("#lblerr").html();
     $("#btnSubmit").prop('disabled', false);
     if(obj == 'SDS ACK IN' || obj == 'SDS-OUT ACK' || obj == 'EXIT') {/* || obj == 'FINAL TRANSIT'*/
@@ -307,7 +308,12 @@ function DisableButton(obj, plocid, alocid)
     }*/
 
     if(alocid == 3)
-        $("#btnSubmit").prop('disabled', true);
+    {
+        if(obj == 'PARKING IN' || obj == 'PARKING OUT')
+            $("#btnSubmit").prop('disabled', false);
+        else
+            $("#btnSubmit").prop('disabled', true);
+    }
 }
 
 function scan()
