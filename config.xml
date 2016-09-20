@@ -1,8 +1,8 @@
-<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.kpcl.vpms" version="2.1.0">
-  <name>VPMS</name>
-  <description>Online Visitor Pass</description>
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.kpcl.sds" version="1.0">
+  <name>SDS Operations</name>
+  <description>SDS Operations</description>
   <author href="http://www.krishnapatnamport.com" email="epms_support@krishnapatnamport.com">Krishnapatnam Port Company LTD.</author>
-  <content src="VisitorRequest.html"/>
+  <content src="login.html"/>
   <preference name="permissions" value="none"/>
   <preference name="orientation" value="portrait"/>
   <preference name="target-device" value="universal"/>
@@ -25,12 +25,7 @@
   <preference name="StatusBarOverlaysWebView" value="false" />
   <preference name="StatusBarBackgroundColor" value="#ff6a00" />
   <preference name="StatusBarStyle" value="lightcontent" />
-  <plugin name="org.apache.cordova.battery-status"/>
-  <plugin name="org.apache.cordova.camera"/>
   <plugin name="org.apache.cordova.device-orientation"/>
-  <plugin name="org.apache.cordova.file"/>
-  <plugin name="org.apache.cordova.file-transfer"/>
-  <plugin name="org.apache.cordova.geolocation"/>
   <plugin name="org.apache.cordova.globalization"/>
   <plugin name="org.apache.cordova.inappbrowser"/>
   <plugin name="org.apache.cordova.media"/>
