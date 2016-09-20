@@ -45,6 +45,7 @@ $(document).ready(function () {
     //$("#divType").hide();
     //$("#divLoc").hide();
     $("#btnSubmit").hide();
+    $("#btnClear").hide();
     $("#txttruckno").focus();
     $("#selLocation").prop('disabled', true);
     qs();
@@ -100,6 +101,10 @@ $(document).ready(function () {
         }
     });
 
+    $("#btnClear").click(function (){
+        window.location.href = 'SDS.html?user=' + btoa($("#hidusrid").val());
+    });
+
     $("#btnSubmit").click(function (){
         var $btn = $("#btnSubmit");
         /*if(LocationValidations() == false)
@@ -147,6 +152,7 @@ $(document).ready(function () {
                 dataType: "json",
                 data: Adddata,
                 success: function (result) {
+                    alert('Data Saved Successfully.');
                     window.location.href = 'SDS.html?user=' + btoa($("#hidusrid").val());
                 },
                 error: function () {
@@ -191,6 +197,7 @@ function GetTruckDetails(truckno)
                     $("#hidfnlflag").val(result[0].FinalTransit_Flag);
                     $("#txtstatus").attr('class', 'text-success');
                     $("#btnSubmit").show();
+                    $("#btnClear").show();
                     /*$("#btnSubmit").html("<i class='fa fa-check'></i> " + result[0].NextStatus);*/
                     $("#hidtrkstatus").val(result[0].NextStatus);
                     $("#btnSubmit").attr('disabled', false);
