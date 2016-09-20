@@ -202,7 +202,7 @@ function GetLocations()
     $.ajax({
         type: "GET",
         contentType: "application/json; charset=utf-8",
-        url: 'http://61.0.225.169/KPCTApi/api/Location/GetLocation',// + $("#hidloctype").val()
+        url: 'http://61.0.225.169/KPCTApi/api/Location/GetLocation/' + $("#hidloctype").val(),
         dataType: "json",
         data: '{}',
         async: false,

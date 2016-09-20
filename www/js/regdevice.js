@@ -47,7 +47,7 @@ $(document).ready(function () {
         }
         else {
             $(this).find("i.fa").attr('class', 'fa fa-spinner fa-spin');
-            $(this).find("span").text("device is registering please wait...");
+            $(this).find("span").text(" device is registering please wait...");
             $(this).attr('disabled', true);
             $(this).attr('class', 'btn btn-custom-icon');
             $("#loading").show();
@@ -71,7 +71,7 @@ $(document).ready(function () {
             });
         }
         $(this).find("i.fa").attr('class', 'fa fa-check');
-        $(this).find("span").text("Submit");
+        $(this).find("span").text(" Submit");
         $(this).attr('disabled', false);
         $(this).attr('class', 'btn btn-custom');
         $("#loading").hide();
