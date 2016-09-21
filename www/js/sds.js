@@ -276,16 +276,15 @@ function GetDeviceStatus()
 
 function ShowObjects()
 {
-    if($("#hidStatusId").val() == 5)
+    /*if($("#hidStatusId").val() == 5)
     {
         $("#divType").show();
         $("#divLoc").show();
-    }
+    }*/
 }
 
 function DisableButton(obj, plocid, alocid)
 {
-    debugger;
     $("#lblerr").html();
     $("#btnSubmit").prop('disabled', false);
     if(obj == 'SDS ACK IN' || obj == 'SDS-OUT ACK' || obj == 'EXIT') {/* || obj == 'FINAL TRANSIT'*/

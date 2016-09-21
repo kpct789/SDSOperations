@@ -25,7 +25,7 @@ $(document).ready(function (){
             /*if(rowCount == 9)
                 $("#add").find("i.fa").css('color', '#E4E4E4');
             else $("#add").find("i.fa").css('color', '#5cb85c');*/
-            $("#tbldata").append("<tbody style='border: 0px;'><tr><td>"+ (rowCount + 1) +"</td><td><input type='text' class='gridinputtext text-right wd' maxlength='3'></td><td>x</td>" +
+            $("#tbldata").append("<tbody><tr><td>"+ (rowCount + 1) +"</td><td><input type='text' class='gridinputtext text-right wd' maxlength='3'></td><td>x</td>" +
                                  "<td><input type='text' class='gridinputtext text-right ht' maxlength='3'></td><td>=</td>" +
                                  "<td><input type='text' class='gridinputtext-readonly text-right tt' readonly></td>" +
                                  "<td><span class='remCF'><i class='fa fa-remove fa-lg' style='color: #d9534f;' aria-hidden='true'></i></span></td></tr></tbody>");
