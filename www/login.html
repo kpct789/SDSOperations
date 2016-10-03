@@ -47,36 +47,35 @@
     window.history.go(1);
     function onBackKeyDown() {
     }
-    $(document).ready(function(){
-        $("#txtusername").focus();
-        $("#btnSubmit").click(function() {
-            var $btn = $("#btnSubmit");
-            if($("#txtusername").val() == "") {
-                alert('Enter User Name.');
-                $("#txtusername").focus();
-                return false;
-            }
-            else if($("#txtpassword").val() == "") {
-                alert('Enter Password.');
-                $("#txtpassword").focus();
-                return false;
-            }
-            else {
-                $btn.find("i.fa").attr('class', 'fa fa-spinner fa-spin fa-lg');
-                $btn.find("span").text("logging in please wait...");
-                $btn.attr('disabled', true);
-                $btn.attr('class', 'btn btn-custom-icon');
-                $("#txtusername").attr('disabled', true);
-                $("#txtpassword").attr('disabled', true);
-                $.ajax({
-                    type: "GET",
-                    url: "http://61.0.225.169/KPCTApi/api/Account/CheckUser/" + $("#txtusername").val() + "/" + $("#txtpassword").val(),
-                    data: '{}',
-                    contentType: "application/json",
-                    success: function () {
-                        window.location.href = 'default.html?user=' + btoa($("#txtusername").val()) + '';
-                    },
-                    error: function () {
+    $(document).ready(function() {
+    $("#txtusername").focus();
+    $("#btnSubmit").click(function() {
+        var $btn = $("#btnSubmit");
+        if ($("#txtusername").val() == "") {
+            alert('Enter User Name.');
+            $("#txtusername").focus();
+            return false;
+        } else if ($("#txtpassword").val() == "") {
+            alert('Enter Password.');
+            $("#txtpassword").focus();
+            return false;
+        } else {
+            $btn.find("i.fa").attr('class', 'fa fa-spinner fa-spin fa-lg');
+            $btn.find("span").text("logging in please wait...");
+            $btn.attr('disabled', true);
+            $btn.attr('class', 'btn btn-custom-icon');
+            $("#txtusername").attr('disabled', true);
+            $("#txtpassword").attr('disabled', true);
+            $.ajax({
+                type: "GET",
+                url: "http://61.0.225.169/KPCTApi/api/Account/ValidateUser/" + $("#txtusername").val() + "/" + $("#txtpassword").val(),
+                data: '{}',
+                contentType: "application/json",
+                success: function(data) {
+                    if (data[1] == 'True') {
+                        var url = 'default.html?user=' + btoa(data[0]) + '';
+                        window.location.href = url;
+                    } else {
                         $btn.find("i.fa").attr('class', 'fa fa-sign-in fa-lg');
                         $btn.find("span").text("Login");
                         $btn.attr('disabled', false);
@@ -87,8 +86,20 @@
                         $("#txtusername").focus();
                         alert("Invalid User Name or Password");
                     }
-                });
-            }
-        });
+                },
+                error: function() {
+                    $btn.find("i.fa").attr('class', 'fa fa-sign-in fa-lg');
+                    $btn.find("span").text("Login");
+                    $btn.attr('disabled', false);
+                    $btn.attr('class', 'btn btn-custom');
+                    $("#txtusername").attr('disabled', false);
+                    $("#txtpassword").attr('disabled', false);
+                    $("#txtpassword").val("");
+                    $("#txtusername").focus();
+                    alert("Invalid User Name or Password");
+                }
+            });
+        }
     });
+});
 </script>
