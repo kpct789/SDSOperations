@@ -235,7 +235,6 @@ function GetTruckDetails(truckno)
                         $("#btnSubmit").html("<i class='fa fa-check'></i> Tally Sheet");
                     else
                         $("#btnSubmit").html("<i class='fa fa-check'></i> " + result[0].NextStatus);
-                    ShowObjects();
                     DisableButton(result[0].NextStatus, result[0].LocType, $("#hidloctype").val());
                 }
                 else {
