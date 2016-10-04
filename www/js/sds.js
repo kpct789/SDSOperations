@@ -52,6 +52,7 @@ $(document).ready(function () {
     GetDeviceStatus();
     GetTruckDetails($("#txttruckno").val().trim());
     Reason();
+
     $("#home").click(function () {
         window.location.href = 'default.html?user=' + btoa($("#hidusrid").val()) + '';
     });
@@ -76,6 +77,7 @@ $(document).ready(function () {
         GetDeviceStatus();
         GetTruckDetails($("#txttruckno").val().trim());
         Reason();
+        GetUserStages($("#hidusrid").val());
         $("#loading").hide();
     });
 
@@ -165,6 +167,31 @@ $(document).ready(function () {
         }
     });
 });
+
+function GetUserStages(userid)
+{
+    $.ajax({
+        url: 'http://61.0.225.169/KPCTApi/api/Account/GetUserStages/' + userid,
+        type: 'GET',
+        data: '{}',
+        dataType: 'json',
+        async: false,
+        success: function (data){
+            if(data.length > 0)
+            {
+                for (var i = 0; i <= data.length; i++)
+                {
+                    if($("#hidStatusId").val() == data[i])
+                    {
+                        $("#btnSubmit").attr('disabled', false);
+                        break;
+                    }
+                    else $("#btnSubmit").attr('disabled', true);
+                }
+            }
+        }
+    });
+}
 
 function GetTruckDetails(truckno)
 {

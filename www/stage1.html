@@ -181,4 +181,105 @@
 <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
 <script type="text/javascript" src="js/jquery.serialize-object.min.js"></script>
 <script type="text/javascript" src="cordova.js"></script>
-<script type="text/javascript" src="js/sds.js"></script>
+<!--<script type="text/javascript" src="js/sds.js"></script>-->
+<script type="text/javascript">
+    var qsParm = new Array();
+    function qs() {
+        var query = window.location.search.substring(1);
+        var parms = query.split('&');
+        for (var i = 0; i < parms.length; i++) {
+            var pos = parms[i].indexOf('=');
+            if (pos > 0) {
+                var key = parms[i].substring(0, pos);
+                var val = parms[i].substring(pos + 1);
+                qsParm[key] = val;
+            }
+        }
+
+        if (parms.length == 1 && query != "") {
+            $("#hidusrid").val(atob(qsParm["user"]));
+            return true;
+        }
+        else if(parms.length > 1) {
+            $("#hidusrid").val(atob(qsParm["user"]));
+            $("#txttruckno").val(atob(qsParm["trkno"]));
+            $("#txtqty").val(atob(qsParm["qty"]));
+            $("#hidloc").val(atob(qsParm["loc"]));
+            $("#hidStatusId").val(atob(qsParm["sid"]));
+            $("#btnSubmit").html("<i class='fa fa-check'></i> Submit");
+            $("#btnSubmit").attr('disabled', false);
+            $("#btnSubmit").attr('class', 'btn btn-custom');
+            return true;
+        }
+        else {
+            window.location.href = 'Login.html';
+            return false;
+        }
+    }
+    $(document).ready(function(){
+        if($("#hidStatusId").val() != "1")
+            $("#btnSubmit").attr('disabled', true);
+        else
+            $("#btnSubmit").attr('disabled', false);
+
+        GetTruckDetails($("#txttruckno").val());
+    });
+    function GetTruckDetails(truckno)
+    {
+        var trkno = truckno == "" ? "" : truckno;
+        if(trkno != "")
+        {
+            $.ajax({
+                url: 'http://61.0.225.169/KPCTApi/api/TruckDetails/GetTruckDetails/' + trkno,
+                type: 'GET',
+                data: '{}',
+                dataType: 'json',
+                async: false,
+                success: function (result) {
+                    if (result.length > 0) {
+                        $("#txtparty").val(result[0].Party);
+                        $("#txtloc").val(result[0].Loc);
+                        $("#txtactloc").val(result[0].ActualLocation);
+                        $("#txtcargo").val(result[0].Cargo);
+                        $("#txtqty").val(result[0].Qty);
+                        $("#txtstatus").text(result[0].Status);
+                        $("#hidNewStatus").val(result[0].NextStatus);
+                        $("#hidTruckId").val(result[0].TruckId);
+                        $("#hidStatusId").val(result[0].StatusId);
+                        $("#hidfrstflag").val(result[0].FirstTransit_Flag);
+                        $("#hidprkngflag").val(result[0].DBParking_Flag);
+                        $("#hidscndflag").val(result[0].SecondTransit_Flag);
+                        $("#hidactlogflag").val(result[0].ActivityLoc_Flag);
+                        $("#hidsdsoutflag").val(result[0].SDSOut_Flag);
+                        $("#hidkpctoutflag").val(result[0].KPCTOut_Flag);
+                        $("#hidfnlflag").val(result[0].FinalTransit_Flag);
+                        $("#txtstatus").attr('class', 'text-success');
+                        $("#btnSubmit").show();
+                        $("#btnClear").show();
+                        /*$("#btnSubmit").html("<i class='fa fa-check'></i> " + result[0].NextStatus);*/
+                        $("#hidtrkstatus").val(result[0].NextStatus);
+                        $("#btnSubmit").attr('disabled', false);
+                        $("#btnSubmit").attr('class', 'btn btn-custom');
+                        if($("#hidStatusId").val() == 5 && $("#hidloctype").val() == 1 && $("#hidNewStatus").val() == "ACTIVITY END")
+                            $("#btnSubmit").html("<i class='fa fa-check'></i> Tally Sheet");
+                        else if($("#hidStatusId").val() == 5 && $("#hidloctype").val() == 2 && $("#hidNewStatus").val() == "ACTIVITY END")
+                            $("#btnSubmit").html("<i class='fa fa-check'></i> Tally Sheet");
+                        else
+                            $("#btnSubmit").html("<i class='fa fa-check'></i> " + result[0].NextStatus);
+                        ShowObjects();
+                        DisableButton(result[0].NextStatus, result[0].LocType, $("#hidloctype").val());
+                    }
+                    else {
+                        $("#txtstatus").text("No Data Found");
+                        $("#txtstatus").attr('class', 'text-danger');
+                    }
+                },
+                error: function () {
+                    alert('Error occurred while loading Truck details.');
+                    $("#imgtruck").hide();
+                    $("#loading").hide();
+                }
+            });
+        }
+    }
+</script>
