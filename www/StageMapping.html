@@ -120,7 +120,6 @@
             $("#selstage option:selected").each(function () {
                 stages += $(this).val().trim() + ',';
             });
-            $("#lblmsg").text(users + '<br>' + stages);
 
             var Adddata = [];
             var user = users.slice(0, -1).split(',');
@@ -143,7 +142,6 @@
                     }
                 }
             }
-            debugger;
             $.ajax({
                 type: 'POST',
                 url: 'http://61.0.225.169/KPCTApi/api/Account/AddUserStages',

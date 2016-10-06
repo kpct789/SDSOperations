@@ -66,7 +66,6 @@ $(document).ready(function () {
     });
 
     $("#imgSearch").click(function () {
-        //debugger;
         $("#loading").show();
         $("#imgtruck").hide();
         $("#txtparty").val("");
@@ -197,6 +196,7 @@ function GetUserStages(userid)
                     else $("#btnSubmit").attr('disabled', true);
                 }
             }
+            else $("#btnSubmit").attr('disabled', true);
         }
     });
 }
@@ -321,12 +321,9 @@ function DisableButton(obj, plocid, alocid)
 {
     $("#lblerr").html();
     $("#btnSubmit").prop('disabled', false);
-    if(obj == 'SDS ACK IN' || obj == 'SDS-OUT ACK' || obj == 'EXIT') {/* || obj == 'FINAL TRANSIT'*/
+    if(obj == 'SDS ACK IN' || obj == 'SDS-OUT ACK' || obj == 'EXIT') {
         $("#btnSubmit").prop('disabled', true);
     }
-    /*else if (obj == 'WH-ACTIVITY START' || obj == 'CT-YARD IN') {
-        $("#selLocation").prop('disabled', false);
-    }*/
     else {
         $("#selLocation").prop('disabled', true);
     }
