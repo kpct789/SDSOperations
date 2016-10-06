@@ -35,7 +35,15 @@ $(document).ready(function () {
     //GetDeviceStatus();
 
     $("#home").click(function () {
-        window.location.href = 'default.html?user=' + btoa($("#hidusrid").val()) + '';
+        $.ajax({
+            type: "GET",
+            url: "http://61.0.225.169/KPCTApi/api/Account/GetUserScreens/" + $("#hidusrid").val(),
+            data: '{}',
+            contentType: "application/json",
+            success: function(result) {
+                window.location.href = result + '?user=' + btoa($("#hidusrid").val());
+            }
+        });
     });
 
     $("#btnSubmit").click(function (){

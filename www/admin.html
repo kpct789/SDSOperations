@@ -135,6 +135,14 @@
                 <tr>
                     <td style="padding: 7px;">
                         <div class="box box2">
+                            <span><i class="fa fa-sitemap fa-5x" aria-hidden="true"></i></span><br>
+                            <label>Stage Mapping</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 7px;">
+                        <div class="box box3">
                             <span><i class="fa fa-dashboard fa-5x" aria-hidden="true"></i></span><br>
                             <label>SDS</label>
                         </div>
@@ -175,6 +183,9 @@
            window.location.href = 'RegDevice.html?user=' + btoa($("#hidusrid").val()) + '';
         });
         $(".box2").click(function(){
+           window.location.href = 'StageMapping.html?user=' + btoa($("#hidusrid").val()) + '';
+        });
+        $(".box3").click(function(){
            window.location.href = 'SDS.html?user=' + btoa($("#hidusrid").val()) + '';
         });
     });

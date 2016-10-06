@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <title>Stage Mapping</title>
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <link rel="stylesheet" type="text/css" href="css/semantic.css">
+        <link rel="stylesheet" type="text/css" href="css/loading.css">
+        <link rel="stylesheet" type="text/css" href="css/dropdown.css">
+        <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.css">
+        <link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Ubuntu'>
+        <style type="text/css">
+            body{
+                font-family: Ubuntu, Consolas;
+            }
+            .content {
+                border-radius: 5px;
+                /*border: 1px solid #c9c9c9;*/
+                padding: 10px;
+                height: 400px;
+                width: 100%;
+                overflow: auto;
+                background-color: #fff;
+            }
+            .readonly-active{
+                background: #fff;
+                border-bottom: 1px solid #808080;
+                border: 0px;
+                border-radius: 0;
+                outline: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="loading" class="loading">Loading&#8230;</div>
+        <div id="header1" class="headerbar">
+            <table style="background: transparent; width: 100%;">
+                <tr>
+                    <td class="topbar-icon text-left"><i id="home" class="fa fa-home fa-2x" aria-hidden="true"></i></td>
+                    <td class="text-center"><span class="headertext">KRISHNAPATNAM PORT</span></td>
+                    <td class="topbar-icon text-right"><a href="login.html"><i class="fa fa-sign-out fa-2x" aria-hidden="true"></i></a></td>
+                </tr>
+            </table>
+        </div>
+        <br>
+        <br>
+        <div class="container">
+            <br>
+            <br>
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-left">
+                    <label for="seluser" class="control-label">Users</label>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-left">
+                    <select id="seluser" class="ui fluid search selection dropdown" multiple="multiple" style="width: 100%"></select>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-left">
+                    <label for="seluser" class="control-label">Stages</label>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-left">
+                    <select id="selstage" class="ui fluid search selection dropdown" multiple="multiple" style="width: 100%"></select>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-left"></div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-left">
+                    <button type="button" id="btnSubmit" class="btn btn-custom"><i class="fa fa-check" aria-hidden="true"></i> <span> Submit</span></button>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
+            </div>
+        </div>
+        <label class="text-success" id="lblmsg"></label>
+        <input type="hidden" id="hidusrid">
+    </body>
+</html>
+<script type="text/javascript" src="js/jquery1.11.1-min.js"></script>
+<script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+<script type="text/javascript" src="js/dropdown.js"></script>
+<script type="text/javascript" src="js/semantic.js"></script>
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript">
+    var width = document.documentElement.clientWidth;
+    var qsParm = new Array();
+
+    $(document).ready(function (){
+        $("#loading").hide();
+        qs();
+        GetUsers();
+        GetStages();
+
+        $("#home").click(function () {
+            $.ajax({
+                type: "GET",
+                url: "http://61.0.225.169/KPCTApi/api/Account/GetUserScreens/" + $("#hidusrid").val(),
+                data: '{}',
+                contentType: "application/json",
+                success: function(result) {
+                    window.location.href = result + '?user=' + btoa($("#hidusrid").val());
+                }
+            });
+        });
+
+        $('#seluser').dropdown();
+        $('#selstage').dropdown();
+
+        $("#btnSubmit").click(function() {
+            var users = "", stages = "";
+            $("#seluser option:selected").each(function () {
+                users += $(this).val().trim() + ',';
+            });
+
+            $("#selstage option:selected").each(function () {
+                stages += $(this).val().trim() + ',';
+            });
+            $("#lblmsg").text(users + '<br>' + stages);
+
+            var Adddata = [];
+            var user = users.slice(0, -1).split(',');
+            for(var i = 0; i < user.length; i++)
+            {
+                if(user[i] != "")
+                {
+                    var stage = stages.slice(0, -1).split(',');
+                    for (var j = 0; j < stage.length; j++)
+                    {
+                        if(stage[0] != "")
+                        {
+                            var obj = {
+                                UserSlno: user[i],
+                                StatusId: stage[j],
+                                CreatedBy: $("#hidusrid").val()
+                            };
+                            Adddata.push(obj);
+                        }
+                    }
+                }
+            }
+            debugger;
+            $.ajax({
+                type: 'POST',
+                url: 'http://61.0.225.169/KPCTApi/api/Account/AddUserStages',
+                dataType: "json",
+                contentType : "application/json",
+                data: JSON.stringify(Adddata),
+                success: function (result) {
+                    $("#btnSubmit").find("i.fa").attr('class', 'fa fa-spinner fa-spin fa-lg');
+                    $("#btnSubmit").find("span").text("data is submitting please wait...");
+                    $("#btnSubmit").attr('disabled', true);
+                    $("#btnSubmit").attr('class', 'btn btn-custom-icon');
+                    alert('Stages Mapped Successfully.');
+                    window.location.href = 'default.html?user=' + btoa($("#hidusrid").val());
+                },
+                error: function () {
+                    alert('Error occurred while submitting data.');
+                }
+            });
+            $("#btnSubmit").find("i.fa").attr('class', 'fa fa-sign-in fa-lg');
+            $("#btnSubmit").find("span").text("Login");
+            $("#btnSubmit").attr('disabled', false);
+            $("#btnSubmit").attr('class', 'btn btn-custom');
+        });
+    });
+    function GetUsers()
+    {
+        $("#seluser").empty();
+        $("#seluser").append("<option value=''>Select User</option>");
+        $.ajax({
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            url: 'http://61.0.225.169/KPCTApi/api/Account/GetUsers',
+            dataType: "json",
+            data: '{}',
+            async: false,
+            success: function (result) {
+                $.each(result, function (key, value) {
+                    $("#seluser").append($("<option></option>").val(value.UserId).html(value.LoginId + '---' + value.EmployeeId));
+                });
+            },
+            error: function () {
+                alert("Error occurred while loading Users.");
+            }
+        });
+    }
+    function GetStages()
+    {
+        $("#selstage").empty();
+        $("#selstage").append("<option value=''>Select Stage</option>");
+        $.ajax({
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            url: 'http://61.0.225.169/KPCTApi/api/Masters/GetStatus',
+            dataType: "json",
+            data: '{}',
+            async: false,
+            success: function (result) {
+                $.each(result, function (key, value) {
+                    $("#selstage").append($("<option></option>").val(value.Id).html(value.Name));
+                });
+            },
+            error: function () {
+                alert("Error occurred while loading Stages.");
+            }
+        });
+    }
+    function qs() {
+        var query = window.location.search.substring(1);
+        var parms = query.split('&');
+        for (var i = 0; i < parms.length; i++) {
+            var pos = parms[i].indexOf('=');
+            if (pos > 0) {
+                var key = parms[i].substring(0, pos);
+                var val = parms[i].substring(pos + 1);
+                qsParm[key] = val;
+            }
+        }
+
+        if (parms.length > 0 && query != "") {
+            $("#hidusrid").val(atob(qsParm["user"]));
+            return true;
+        }
+        else {
+            window.location.href = 'Login.html';
+            return false;
+        }
+    }
+</script>
