@@ -6,7 +6,12 @@ function onDeviceReady() {
     window.plugins.imeiplugin.getImei(callback);
     nfc.enabled(function(){
         lblerr.innerHTML = "Tap nfc tag to read";
-        nfc.addNdefListener(ndefTagDetected, GetTruckDetails(txttruckno.value));
+        nfc.addNdefListener(
+            ndefTagDetected,
+            function(){
+                debugger;
+                GetTruckDetails(txttruckno.value)
+        });
     },
     function(){
         //alert('NFC is disabled in your device. Please enable and come back again.');
