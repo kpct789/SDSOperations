@@ -6,7 +6,7 @@ function onDeviceReady() {
     window.plugins.imeiplugin.getImei(callback);
     nfc.enabled(function(){
         lblerr.innerHTML = "Tap nfc tag to read";
-        nfc.addNdefListener(
+        nfc.addNdefFormatableListener(
             function (record){
                 txttruckno.value = "";
                 var tagdata = record.tag.ndefMessage[0]["payload"];
