@@ -1,39 +1,19 @@
 var qsParm = new Array();
 document.addEventListener("deviceready", onDeviceReady, false);
 
-/*var readapp = {
-    initialize: function(){
-        this.bindEvents();
-    },
-
-    bindEvents: function(){
-        document.addEventListener('deviceready', this.onDeviceReady, false);
-    },
-
-    onDeviceReady: function(){
-        $("#hiduuid").val(device.uuid);
-        window.plugins.imeiplugin.getImei(callback);
-        nfc.enabled(function(){
-            lblerr.innerHTML = "Tap nfc tag to read";
-            nfc.addNdefListener(ndefTagDetected);
-        },
-        function(){
-            alert('NFC is disabled in your device. Please enable and come back again.')
-        });
-    }
-};*/
 function onDeviceReady() {
     $("#hiduuid").val(device.uuid);
     window.plugins.imeiplugin.getImei(callback);
     nfc.enabled(function(){
         lblerr.innerHTML = "Tap nfc tag to read";
-        nfc.addNdefListener(ndefTagDetected);
+        nfc.addNdefListener(ndefTagDetected, GetTruckDetails(txttruckno.value));
     },
     function(){
-        alert('NFC is disabled in your device. Please enable and come back again.')
+        //alert('NFC is disabled in your device. Please enable and come back again.');
+        lblerr.innerHTML = "";
     });
-    if(txttruckno.value != "")
-            GetTruckDetails(txttruckno.value);
+    /*if(txttruckno.value != "")
+        GetTruckDetails(txttruckno.value);*/
 }
 function ndefTagDetected(record){
     txttruckno.value = "";
