@@ -34,7 +34,7 @@ function onDeviceReady() {
     });
 }
 function ndefTagDetected(record){
-    //debugger;
+    debugger;
     txttruckno.value = "";
     var tagdata = record.tag.ndefMessage[0]["payload"];
     var label = document.createTextNode(nfc.bytesToString(tagdata));
@@ -45,7 +45,6 @@ function ndefTagDetected(record){
 
 function callback(imei) {
     $("#hidimei").val(imei);
-    lblerr.innerHTML = imei;
 }
 function qs() {
     var query = window.location.search.substring(1);
