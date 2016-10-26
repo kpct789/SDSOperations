@@ -15,7 +15,25 @@ function onDeviceReady() {
                 lblerr.innerHTML = "";
             },
             function(){
+                $("#txtparty").val();
+                $("#txtloc").val();
+                $("#txtactloc").val();
+                $("#txtcargo").val();
+                $("#txtqty").val();
+                $("#txtstatus").text();
+                $("#hidNewStatus").val();
+                $("#hidTruckId").val();
+                $("#hidStatusId").val();
+                $("#hidfrstflag").val();
+                $("#hidprkngflag").val();
+                $("#hidscndflag").val();
+                $("#hidactlogflag").val();
+                $("#hidsdsoutflag").val();
+                $("#hidkpctoutflag").val();
+                $("#hidfnlflag").val();
                 lblerr.innerHTML = "";
+                $("#btnSubmit").hide();
+                $("#btnClear").hide();
             },
             function(){
                 lblerr.innerHTML = "Error in reading tag.";
