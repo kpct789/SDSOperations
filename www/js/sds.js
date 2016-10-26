@@ -1,7 +1,7 @@
 var qsParm = new Array();
-//document.addEventListener("deviceready", onDeviceReady, false);
+document.addEventListener("deviceready", onDeviceReady, false);
 
-var readapp = {
+/*var readapp = {
     initialize: function(){
         this.bindEvents();
     },
@@ -11,7 +11,6 @@ var readapp = {
     },
 
     onDeviceReady: function(){
-        debugger;
         $("#hiduuid").val(device.uuid);
         window.plugins.imeiplugin.getImei(callback);
         nfc.enabled(function(){
@@ -22,7 +21,11 @@ var readapp = {
             alert('NFC is disabled in your device. Please enable and come back again.')
         });
     }
-};
+};*/
+function onDeviceReady() {
+    $("#hiduuid").val(device.uuid);
+    window.plugins.imeiplugin.getImei(callback);
+}
 function ndefTagDetected(record){
     //debugger;
     txttruckno.value = "";
@@ -30,14 +33,12 @@ function ndefTagDetected(record){
     var label = document.createTextNode(nfc.bytesToString(tagdata));
     txttruckno.value = label.data;
     lblerr.innerHTML = "";
+    GetTruckDetails(txttruckno.value);
 }
 
-/*function onDeviceReady() {
-    $("#hiduuid").val(device.uuid);
-    window.plugins.imeiplugin.getImei(callback);
-}*/
 function callback(imei) {
     $("#hidimei").val(imei);
+    lblerr.innerHTML = imei;
 }
 function qs() {
     var query = window.location.search.substring(1);
