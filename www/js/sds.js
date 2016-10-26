@@ -7,7 +7,13 @@ function onDeviceReady() {
     nfc.enabled(function(){
         lblerr.innerHTML = "Tap nfc tag to read";
         nfc.addNdefListener(
-            ndefTagDetected,
+            function ndefTagDetected(record){
+                txttruckno.value = "";
+                var tagdata = record.tag.ndefMessage[0]["payload"];
+                var label = document.createTextNode(nfc.bytesToString(tagdata));
+                txttruckno.value = label.data.substring(3);
+                lblerr.innerHTML = "";
+            },
             function(){
                 debugger;
                 GetTruckDetails(txttruckno.value)
@@ -20,13 +26,13 @@ function onDeviceReady() {
     /*if(txttruckno.value != "")
         GetTruckDetails(txttruckno.value);*/
 }
-function ndefTagDetected(record){
+/*function ndefTagDetected(record){
     txttruckno.value = "";
     var tagdata = record.tag.ndefMessage[0]["payload"];
     var label = document.createTextNode(nfc.bytesToString(tagdata));
     txttruckno.value = label.data.substring(3);
     lblerr.innerHTML = "";
-}
+}*/
 
 function callback(imei) {
     $("#hidimei").val(imei);
