@@ -28,15 +28,14 @@ function onDeviceReady() {
     nfc.enabled(function(){
         lblerr.innerHTML = "Tap nfc tag to read";
         nfc.addNdefListener(ndefTagDetected);
-        if(txttruckno.value != "")
-            GetTruckDetails(txttruckno.value);
     },
     function(){
         alert('NFC is disabled in your device. Please enable and come back again.')
     });
+    if(txttruckno.value != "")
+            GetTruckDetails(txttruckno.value);
 }
 function ndefTagDetected(record){
-    debugger;
     txttruckno.value = "";
     var tagdata = record.tag.ndefMessage[0]["payload"];
     var label = document.createTextNode(nfc.bytesToString(tagdata));
