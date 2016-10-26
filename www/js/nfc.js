@@ -20,7 +20,7 @@ var readapp = {
 function ndefTagDetected(record){
     debugger;
     var tagdata = record.tag.ndefMessage[0]["payload"];
-    var label = document.createTextNode(nfc.bytesToString(tagdata)),
+    var label = document.createTextNode(nfc.bytesToString(tagdata));
     txttruckno.value = label;
     //lineBreak = document.createElement("br");
     //messageDiv.appendChild(lineBreak); // add a line break
