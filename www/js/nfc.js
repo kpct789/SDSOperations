@@ -9,6 +9,7 @@ var readapp = {
 
     onDeviceReady: function(){
         nfc.enabled(function(){
+            debugger;
             nfc.addNdefListener(nfcTagDetected);
         },
         function(){
@@ -17,10 +18,12 @@ var readapp = {
     }
 };
 function ndefTagDetected(record){
+    debugger;
     var tagdata = record.tag.ndefMessage[0]["payload"];
     var label = document.createTextNode(nfc.bytesToString(tagdata)),
-    lineBreak = document.createElement("br");
-    messageDiv.appendChild(lineBreak); // add a line break
-    messageDiv.appendChild(label); // add the text
+    txttruckno.value = label;
+    //lineBreak = document.createElement("br");
+    //messageDiv.appendChild(lineBreak); // add a line break
+    //messageDiv.appendChild(label); // add the text
     //alert(nfc.bytesToString(tagdata));
 }
