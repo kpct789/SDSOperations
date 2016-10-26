@@ -28,6 +28,7 @@ function onDeviceReady() {
     nfc.enabled(function(){
         lblerr.innerHTML = "Tap nfc tag to read";
         nfc.addNdefListener(ndefTagDetected);
+        GetTruckDetails(txttruckno.value);
     },
     function(){
         alert('NFC is disabled in your device. Please enable and come back again.')
@@ -40,7 +41,6 @@ function ndefTagDetected(record){
     var label = document.createTextNode(nfc.bytesToString(tagdata));
     txttruckno.value = label.data;
     lblerr.innerHTML = "";
-    GetTruckDetails(txttruckno.value);
 }
 
 function callback(imei) {
@@ -244,6 +244,7 @@ function GetTruckDetails(truckno)
     var trkno = truckno == "" ? "" : truckno;
     if(trkno != "")
     {
+        var dataurl = 'http://61.0.225.169/KPCTApi/api/TruckDetails/GetTruckDetails/' + trkno;
         $.ajax({
             url: 'http://61.0.225.169/KPCTApi/api/TruckDetails/GetTruckDetails/' + trkno,
             type: 'GET',
