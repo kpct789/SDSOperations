@@ -11,6 +11,7 @@ var readapp = {
     },
 
     onDeviceReady: function(){
+        debugger;
         $("#hiduuid").val(device.uuid);
         window.plugins.imeiplugin.getImei(callback);
         nfc.enabled(function(){
@@ -24,9 +25,10 @@ var readapp = {
 };
 function ndefTagDetected(record){
     //debugger;
+    txttruckno.value = "";
     var tagdata = record.tag.ndefMessage[0]["payload"];
     var label = document.createTextNode(nfc.bytesToString(tagdata));
-    txttruckno.value = label;
+    txttruckno.value = label.data;
     lblerr.innerHTML = "";
 }
 
