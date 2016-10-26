@@ -10,6 +10,7 @@ var readapp = {
     onDeviceReady: function(){
         nfc.enabled(function(){
             debugger;
+            lblerr.innerHTML = "Tap nfc tag to read";
             nfc.addNdefListener(nfcTagDetected);
         },
         function(){
