@@ -25,6 +25,13 @@ document.addEventListener("deviceready", onDeviceReady, false);
 function onDeviceReady() {
     $("#hiduuid").val(device.uuid);
     window.plugins.imeiplugin.getImei(callback);
+    nfc.enabled(function(){
+        lblerr.innerHTML = "Tap nfc tag to read";
+        nfc.addNdefListener(ndefTagDetected);
+    },
+    function(){
+        alert('NFC is disabled in your device. Please enable and come back again.')
+    });
 }
 function ndefTagDetected(record){
     //debugger;
