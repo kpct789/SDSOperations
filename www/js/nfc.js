@@ -11,7 +11,7 @@ var readapp = {
         nfc.enabled(function(){
             //debugger;
             lblerr.innerHTML = "Tap nfc tag to read";
-            nfc.addNdefListener(nfcTagDetected);
+            nfc.addNdefListener(ndefTagDetected);
         },
         function(){
             alert('NFC is disabled in your device. Please enable and come back again.')
