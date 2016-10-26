@@ -7,7 +7,7 @@ function onDeviceReady() {
     nfc.enabled(function(){
         lblerr.innerHTML = "Tap nfc tag to read";
         nfc.addNdefListener(
-            function ndefTagDetected(record){
+            function (record){
                 txttruckno.value = "";
                 var tagdata = record.tag.ndefMessage[0]["payload"];
                 var label = document.createTextNode(nfc.bytesToString(tagdata));
@@ -232,7 +232,6 @@ function GetUserStages(userid)
 
 function GetTruckDetails(truckno)
 {
-    debugger;
     var trkno = truckno == "" ? "" : truckno;
     if(trkno != "")
     {
