@@ -14,8 +14,6 @@ function onDeviceReady() {
                 var label = document.createTextNode(nfc.bytesToString(tagdata));
                 txttruckno.value = label.data.substring(3);
                 lblerr.innerHTML = "";
-            },
-            function(){
                 debugger;
                 txtparty.value = "";
                 $("#txtloc").val();
@@ -33,9 +31,11 @@ function onDeviceReady() {
                 $("#hidsdsoutflag").val();
                 $("#hidkpctoutflag").val();
                 $("#hidfnlflag").val();
-                lblerr.innerHTML = "";
                 $("#btnSubmit").hide();
                 $("#btnClear").hide();
+            },
+            function(){
+                lblerr.innerHTML = "";
             },
             function(){
                 lblerr.innerHTML = "Error in reading tag.";
