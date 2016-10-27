@@ -6,7 +6,6 @@ function onDeviceReady() {
     $("#hiduuid").val(device.uuid);
     window.plugins.imeiplugin.getImei(callback);
     nfc.enabled(function(){
-        window.location.href = 'SDS.html?user=' + btoa(hidusrid.value) + '';
         lblerr.innerHTML = "Tap nfc tag to read";
         nfc.addNdefListener(
             function (record){
