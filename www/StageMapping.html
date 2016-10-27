@@ -165,6 +165,10 @@
                         data: '{}',
                         contentType: "application/json",
                         success: function(result) {
+                            $("#btnSubmit").find("i.fa").attr('class', 'fa fa-check');
+                            $("#btnSubmit").find("span").text("Submit");
+                            $("#btnSubmit").attr('disabled', false);
+                            $("#btnSubmit").attr('class', 'btn btn-custom');
                             window.location.href = result + '?user=' + btoa($("#hidusrid").val());
                         }
                     });
@@ -173,10 +177,6 @@
                     alert('Error occurred while submitting data.\n\r' + xhr.responseText);
                 }
             });
-            $("#btnSubmit").find("i.fa").attr('class', 'fa fa-sign-in fa-lg');
-            $("#btnSubmit").find("span").text("Submit");
-            $("#btnSubmit").attr('disabled', false);
-            $("#btnSubmit").attr('class', 'btn btn-custom');
         });
     });
     function GetUsers()

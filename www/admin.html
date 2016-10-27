@@ -122,6 +122,7 @@
             </table>
         </div>
         <br>
+        <label class="text-info" id="lblMsg">Loading...</label>
         <div class="container text-center">
             <table>
                 <tr>
@@ -185,14 +186,18 @@
     }
     $(document).ready(function(){
         qs();
+        $("#lblMsg").hide();
         $(".box1").click(function(){
-           window.location.href = 'RegDevice.html?user=' + btoa($("#hidusrid").val()) + '';
+            $("#lblMsg").show();
+            window.location.href = 'RegDevice.html?user=' + btoa($("#hidusrid").val()) + '';
         });
         $(".box2").click(function(){
-           window.location.href = 'StageMapping.html?user=' + btoa($("#hidusrid").val()) + '';
+            $("#lblMsg").show();
+            window.location.href = 'StageMapping.html?user=' + btoa($("#hidusrid").val()) + '';
         });
         $(".box3").click(function(){
-           window.location.href = 'SDS.html?user=' + btoa($("#hidusrid").val()) + '';
+            $("#lblMsg").show();
+            window.location.href = 'SDS.html?user=' + btoa($("#hidusrid").val()) + '';
         });
     });
 </script>
