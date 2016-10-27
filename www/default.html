@@ -113,6 +113,7 @@
         </style>
     </head>
     <body>
+        <div id="loading" class="loading">Loading&#8230;</div>
         <div class="topbar">
             <table style="background: transparent; width: 100%;">
                 <tr>
@@ -122,7 +123,6 @@
             </table>
         </div>
         <br>
-        <label class="text-info" id="lblMsg">Loading...</label>
         <div class="container text-center">
             <table>
                 <tr>
@@ -178,13 +178,13 @@
     }
     $(document).ready(function(){
         qs();
-        $("#lblMsg").hide();
+        $("#loading").hide();
         $(".box1").click(function(){
-            $("#lblMsg").show();
+            $("#loading").show();
             window.location.href = 'RegDevice.html?user=' + btoa($("#hidusrid").val()) + '';
         });
         $(".box2").click(function(){
-            $("#lblMsg").show();
+            $("#loading").show();
             window.location.href = 'SDS.html?user=' + btoa($("#hidusrid").val()) + '';
         });
     });
