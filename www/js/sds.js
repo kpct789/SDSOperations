@@ -32,7 +32,7 @@ function onDeviceReady() {
                 hidkpctoutflag.value = "";
                 hidfnlflag.value = "";
                 btnSubmit.style.display = 'none';
-                btnClear..style.display = 'none';
+                btnClear.style.display = 'none';
             },
             function(){
                 lblerr.innerHTML = "";
