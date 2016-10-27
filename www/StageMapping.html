@@ -154,14 +154,22 @@
                     $("#btnSubmit").attr('disabled', true);
                     $("#btnSubmit").attr('class', 'btn btn-custom-icon');
                     alert('Stages Mapped Successfully.');
-                    window.location.href = 'default.html?user=' + btoa($("#hidusrid").val());
+                    $.ajax({
+                        type: "GET",
+                        url: "http://61.0.225.169/KPCTApi/api/Account/GetUserScreens/" + $("#hidusrid").val(),
+                        data: '{}',
+                        contentType: "application/json",
+                        success: function(result) {
+                            window.location.href = result + '?user=' + btoa($("#hidusrid").val());
+                        }
+                    });
                 },
                 error: function (xhr, status, error) {
                     alert('Error occurred while submitting data.\n\r' + xhr.responseText);
                 }
             });
             $("#btnSubmit").find("i.fa").attr('class', 'fa fa-sign-in fa-lg');
-            $("#btnSubmit").find("span").text("Login");
+            $("#btnSubmit").find("span").text("Submit");
             $("#btnSubmit").attr('disabled', false);
             $("#btnSubmit").attr('class', 'btn btn-custom');
         });

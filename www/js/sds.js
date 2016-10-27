@@ -238,6 +238,14 @@ function GetUserStages(userid)
             else $("#btnSubmit").attr('disabled', true);
         }
     });
+
+    var obj = $("#hidNewStatus").val();
+    if(obj == 'SDS ACK IN' || obj == 'SDS-OUT ACK' || obj == 'EXIT') {
+        $("#btnSubmit").prop('disabled', true);
+    }
+    else {
+        $("#selLocation").prop('disabled', true);
+    }
 }
 
 function GetTruckDetails(truckno)
