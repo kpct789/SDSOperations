@@ -203,8 +203,8 @@ $(document).ready(function () {
                     alert('Data Saved Successfully.');
                     window.location.href = 'SDS.html?user=' + btoa($("#hidusrid").val());
                 },
-                error: function () {
-                    alert('Error occurred while saving the data.');
+                error: function (xhr, status, error) {
+                    alert('Error occurred while saving the data.\n\r' + xhr.responseText);
                     $btn.html("<i class='fa fa-check'></i> Submit");
                     $btn.attr('disabled', false);
                     $btn.attr('class', 'btn btn-custom-icon');

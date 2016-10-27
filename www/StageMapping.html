@@ -156,8 +156,8 @@
                     alert('Stages Mapped Successfully.');
                     window.location.href = 'default.html?user=' + btoa($("#hidusrid").val());
                 },
-                error: function () {
-                    alert('Error occurred while submitting data.');
+                error: function (xhr, status, error) {
+                    alert('Error occurred while submitting data.\n\r' + xhr.responseText);
                 }
             });
             $("#btnSubmit").find("i.fa").attr('class', 'fa fa-sign-in fa-lg');

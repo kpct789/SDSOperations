@@ -72,9 +72,9 @@ $(document).ready(function () {
                 success: function (loctyperesult) {
                     alert('Device Registered Successfully');
                 },
-                error: function () {
+                error: function (xhr, status, error) {
                     $("#btnSubmit").prop('disabled', false);
-                    alert('Error Occurred while Registring device.');
+                    alert('Error Occurred while Registring device.\n\r' + xhr.responseText);
                 }
             });
         }
