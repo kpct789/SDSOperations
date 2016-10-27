@@ -17,7 +17,7 @@ function onDeviceReady() {
             },
             function(){
                 debugging;
-                $("#txtparty").val();
+                txtparty.value = "";
                 $("#txtloc").val();
                 $("#txtactloc").val();
                 $("#txtcargo").val();
