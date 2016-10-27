@@ -43,30 +43,20 @@
 </html>
 <script type="text/javascript" src="js/jquery1.11.1-min.js"></script>
 <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
-<script type="text/javascript" src="js/phonegap-1.1.0.js"></script>
+<script type="text/javascript" src="cordova.js"></script>
 <script type="text/javascript">
-    var url = "", click = 0;
+    var url = "";
     document.addEventListener("deviceready", onDeviceReady, false);
     function onDeviceReady() {
         document.addEventListener("backbutton", onBackKeyDown, false);
     }
     function onBackKeyDown() {
-        click = parseInt(click) + 1;
-        if (isPhoneGap() || /android/i.test(navigator.userAgent)) {
-            window.plugins.toast.show('Press back again to exit', 'short', 'bottom');
-        }
-        setTimeout(ClearClick, 3000);
-        if (parseInt(click) == 2)
+        var state = confirm('NFC is disabled. Please enable NFC.');
+        if (state)
             navigator.app.exitApp(); // exit the app
-    }
-    function ClearClick() {
-        click = 0;
     }
     $(document).ready(function() {
         $("#txtusername").focus();
-        if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-            setTimeout(ClearClick, 3000);
-        }
         $("#btnSubmit").click(function() {
             var $btn = $("#btnSubmit");
             if ($("#txtusername").val() == "") {

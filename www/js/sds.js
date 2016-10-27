@@ -14,7 +14,6 @@ function onDeviceReady() {
                 var label = document.createTextNode(nfc.bytesToString(tagdata));
                 txttruckno.value = label.data.substring(3);
                 lblerr.innerHTML = "";
-                debugger;
                 txtparty.value = "";
                 txtloc.value = "";
                 txtactloc.value = "";
