@@ -125,58 +125,65 @@
             $("#selstage option:selected").each(function () {
                 stages += $(this).val().trim() + ',';
             });
-
-            var Adddata = [];
-            var user = users.slice(0, -1).split(',');
-            for(var i = 0; i < user.length; i++)
+            if(users == "" || stages == "")
             {
-                if(user[i] != "")
+                alert('Please select atleast one User and one Stage.');
+                return false;
+            }
+            else
+            {
+                $("#btnSubmit").find("i.fa").attr('class', 'fa fa-spinner fa-spin fa-lg');
+                $("#btnSubmit").find("span").text("data is submitting please wait...");
+                $("#btnSubmit").attr('disabled', true);
+                $("#btnSubmit").attr('class', 'btn btn-custom-icon');
+                var Adddata = [];
+                var user = users.slice(0, -1).split(',');
+                for(var i = 0; i < user.length; i++)
                 {
-                    var stage = stages.slice(0, -1).split(',');
-                    for (var j = 0; j < stage.length; j++)
+                    if(user[i] != "")
                     {
-                        if(stage[0] != "")
+                        var stage = stages.slice(0, -1).split(',');
+                        for (var j = 0; j < stage.length; j++)
                         {
-                            var obj = {
-                                UserSlno: user[i],
-                                StatusId: stage[j],
-                                CreatedBy: $("#hidusrid").val()
-                            };
-                            Adddata.push(obj);
+                            if(stage[0] != "")
+                            {
+                                var obj = {
+                                    UserSlno: user[i],
+                                    StatusId: stage[j],
+                                    CreatedBy: $("#hidusrid").val()
+                                };
+                                Adddata.push(obj);
+                            }
                         }
                     }
                 }
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://61.0.225.169/KPCTApi/api/Account/AddUserStages',
+                    dataType: "json",
+                    contentType : "application/json",
+                    data: JSON.stringify(Adddata),
+                    success: function (result) {
+                        alert('Stages Mapped Successfully.');
+                        $.ajax({
+                            type: "GET",
+                            url: "http://61.0.225.169/KPCTApi/api/Account/GetUserScreens/" + $("#hidusrid").val(),
+                            data: '{}',
+                            contentType: "application/json",
+                            success: function(result) {
+                                window.location.href = result + '?user=' + btoa($("#hidusrid").val());
+                            }
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        alert('Error occurred while submitting data.\n\r' + xhr.responseText);
+                        $("#btnSubmit").find("i.fa").attr('class', 'fa fa-check');
+                        $("#btnSubmit").find("span").text("Submit");
+                        $("#btnSubmit").attr('disabled', false);
+                        $("#btnSubmit").attr('class', 'btn btn-custom');
+                    }
+                });
             }
-            $.ajax({
-                type: 'POST',
-                url: 'http://61.0.225.169/KPCTApi/api/Account/AddUserStages',
-                dataType: "json",
-                contentType : "application/json",
-                data: JSON.stringify(Adddata),
-                success: function (result) {
-                    $("#btnSubmit").find("i.fa").attr('class', 'fa fa-spinner fa-spin fa-lg');
-                    $("#btnSubmit").find("span").text("data is submitting please wait...");
-                    $("#btnSubmit").attr('disabled', true);
-                    $("#btnSubmit").attr('class', 'btn btn-custom-icon');
-                    alert('Stages Mapped Successfully.');
-                    $.ajax({
-                        type: "GET",
-                        url: "http://61.0.225.169/KPCTApi/api/Account/GetUserScreens/" + $("#hidusrid").val(),
-                        data: '{}',
-                        contentType: "application/json",
-                        success: function(result) {
-                            window.location.href = result + '?user=' + btoa($("#hidusrid").val());
-                        }
-                    });
-                },
-                error: function (xhr, status, error) {
-                    alert('Error occurred while submitting data.\n\r' + xhr.responseText);
-                    $("#btnSubmit").find("i.fa").attr('class', 'fa fa-check');
-                    $("#btnSubmit").find("span").text("Submit");
-                    $("#btnSubmit").attr('disabled', false);
-                    $("#btnSubmit").attr('class', 'btn btn-custom');
-                }
-            });
         });
     });
     function GetUsers()

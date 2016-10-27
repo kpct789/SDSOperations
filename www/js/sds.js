@@ -16,7 +16,7 @@ function onDeviceReady() {
                 lblerr.innerHTML = "";
             },
             function(){
-                debugging;
+                debugger;
                 txtparty.value = "";
                 $("#txtloc").val();
                 $("#txtactloc").val();
