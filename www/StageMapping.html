@@ -89,7 +89,12 @@
 <script type="text/javascript">
     var width = document.documentElement.clientWidth;
     var qsParm = new Array();
-
+    document.addEventListener("deviceready", onDeviceReady, false);
+    function onDeviceReady() {
+        document.addEventListener("backbutton", onBackKeyDown, false);
+    }
+    function onBackKeyDown() {
+    }
     $(document).ready(function (){
         $("#loading").hide();
         qs();

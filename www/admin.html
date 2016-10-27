@@ -157,6 +157,12 @@
 <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
 <script type="text/javascript">
     var qsParm = new Array();
+    document.addEventListener("deviceready", onDeviceReady, false);
+    function onDeviceReady() {
+        document.addEventListener("backbutton", onBackKeyDown, false);
+    }
+    function onBackKeyDown() {
+    }
     function qs() {
         var query = window.location.search.substring(1);
         var parms = query.split('&');

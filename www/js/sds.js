@@ -2,6 +2,7 @@ var qsParm = new Array();
 document.addEventListener("deviceready", onDeviceReady, false);
 
 function onDeviceReady() {
+    document.addEventListener("backbutton", onBackKeyDown, false);
     $("#hiduuid").val(device.uuid);
     window.plugins.imeiplugin.getImei(callback);
     nfc.enabled(function(){
@@ -15,6 +16,7 @@ function onDeviceReady() {
                 lblerr.innerHTML = "";
             },
             function(){
+                debugging;
                 $("#txtparty").val();
                 $("#txtloc").val();
                 $("#txtactloc").val();
@@ -43,7 +45,8 @@ function onDeviceReady() {
         lblerr.innerHTML = "";
     });
 }
-
+function onBackKeyDown() {
+}
 function callback(imei) {
     $("#hidimei").val(imei);
 }

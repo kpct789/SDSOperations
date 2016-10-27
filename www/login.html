@@ -45,8 +45,11 @@
 <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
 <script type="text/javascript" src="cordova.js"></script>
 <script type="text/javascript">
-    window.history.go(1);
     var url = "";
+    document.addEventListener("deviceready", onDeviceReady, false);
+    function onDeviceReady() {
+        document.addEventListener("backbutton", onBackKeyDown, false);
+    }
     function onBackKeyDown() {
     }
     $(document).ready(function() {

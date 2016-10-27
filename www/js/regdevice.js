@@ -2,13 +2,15 @@ var qsParm = new Array();
 document.addEventListener("deviceready", onDeviceReady, false);
 
 function onDeviceReady() {
+    document.addEventListener("backbutton", onBackKeyDown, false);
     $("#txtuuid").val(device.uuid);
     window.plugins.imeiplugin.getImei(callback);
 }
 function callback(imei) {
     $("#txtimei").val(imei);
 }
-
+function onBackKeyDown() {
+}
 function qs() {
     var query = window.location.search.substring(1);
     var parms = query.split('&');

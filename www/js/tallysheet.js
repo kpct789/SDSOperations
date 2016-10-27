@@ -1,9 +1,23 @@
 var qsParm = new Array();
+document.addEventListener("deviceready", onDeviceReady, false);
+function onDeviceReady() {
+    document.addEventListener("backbutton", onBackKeyDown, false);
+}
+function onBackKeyDown() {
+}
 $(document).ready(function (){
     $("#loading").hide();
     $("#btnSubmit").hide();
     $("#home").click(function () {
-        window.location.href = 'default.html?user=' + btoa($("#hidusrid").val()) + '';
+        $.ajax({
+            type: "GET",
+            url: "http://61.0.225.169/KPCTApi/api/Account/GetUserScreens/" + $("#hidusrid").val(),
+            data: '{}',
+            contentType: "application/json",
+            success: function(result) {
+                window.location.href = result + '?user=' + btoa($("#hidusrid").val());
+            }
+        });
     });
     qs();
     GetCargoCondition();
@@ -26,9 +40,9 @@ $(document).ready(function (){
                 $("#add").find("i.fa").css('color', '#E4E4E4');
             else $("#add").find("i.fa").css('color', '#5cb85c');*/
             $("#tbldata").append("<tbody><tr><td>"+ (rowCount + 1) +"</td><td><input type='text' class='gridinputtext text-right wd' maxlength='3'></td><td>x</td>" +
-                                 "<td><input type='text' class='gridinputtext text-right ht' maxlength='3'></td><td>=</td>" +
-                                 "<td><input type='text' class='gridinputtext-readonly text-right tt' readonly></td>" +
-                                 "<td><span class='remCF'><i class='fa fa-remove fa-lg' style='color: #d9534f;' aria-hidden='true'></i></span></td></tr></tbody>");
+                 "<td><input type='text' class='gridinputtext text-right ht' maxlength='3'></td><td>=</td>" +
+                 "<td><input type='text' class='gridinputtext-readonly text-right tt' readonly></td>" +
+                 "<td><span class='remCF'><i class='fa fa-remove fa-lg' style='color: #d9534f;' aria-hidden='true'></i></span></td></tr></tbody>");
             $("#tbldata tbody tr:eq(" + rowCount + ") td:eq(1)").find("input").focus();
         }
         $("#btnSubmit").show();
