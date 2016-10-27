@@ -16,9 +16,11 @@ function onDeviceReady() {
                 lblerr.innerHTML = "";
                 txtparty.value = "";
                 txtloc.value = "";
+                txtloctype.value = "";
                 txtactloc.value = "";
                 txtcargo.value = "";
                 txtqty.value = "";
+                txtremarks.value = "";
                 txtstatus.innerHTML = "";
                 hidNewStatus.value = "";
                 hidTruckId.value = "";
@@ -30,6 +32,8 @@ function onDeviceReady() {
                 hidsdsoutflag.value = "";
                 hidkpctoutflag.value = "";
                 hidfnlflag.value = "";
+                hidloc.value = "";
+                hidloctype.value = "";
                 btnSubmit.style.display = 'none';
                 btnClear.style.display = 'none';
             },

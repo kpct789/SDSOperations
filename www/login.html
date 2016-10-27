@@ -51,7 +51,7 @@
         document.addEventListener("backbutton", onBackKeyDown, false);
     }
     function onBackKeyDown() {
-        var state = confirm('NFC is disabled. Please enable NFC.');
+        var state = confirm('Are You Sure you want to Exit.');
         if (state)
             navigator.app.exitApp(); // exit the app
     }
