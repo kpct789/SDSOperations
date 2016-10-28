@@ -1,5 +1,6 @@
 var width = document.documentElement.clientWidth;
 var qsParm = new Array();
+var usrStages = [];
 document.addEventListener("deviceready", onDeviceReady, false);
 
 function onDeviceReady() {
@@ -27,7 +28,13 @@ $(document).ready(function (){
 
     $('#seluser').dropdown();
 
+    /*$('#seluser').change(function(){
+        GetUserStages($(this).val().trim());
+        GetStages();
+    });*/
+
     $("#btnSubmit").click(function() {
+        debugger;
         var users = "", stages = "";
         var len = $('.list .child.checkbox').length;
         $("#seluser option:selected").each(function () {
@@ -173,8 +180,6 @@ function GetUsers()
 }
 function GetStages()
 {
-    $("#selstage").empty();
-    $("#selstage").append("<option value=''>Select Stage</option>");
     $.ajax({
         type: "GET",
         contentType: "application/json; charset=utf-8",
@@ -184,12 +189,44 @@ function GetStages()
         async: false,
         success: function (result) {
             $.each(result, function (key, value) {
-                $("#selstage").append($("<option></option>").val(value.Id).html(value.Name));
-                $("#listStage").append($("<div class='item'><div class='ui fluid child checkbox'><input type='checkbox' name=" + value.Id + "><label>" + value.Name + "</label></div></div>"));
+                if(usrStages.length > 0)
+                {
+                    for(var i = 0; i < usrStages.length; i++)
+                    {
+                        if(usrStages[i] == value.Id)
+                        {
+                            $("#listStage").append($("<div class='item'><div class='ui fluid child checkbox'><input type='checkbox' checked name=" + value.Id + "><label>" + value.Name + "</label></div></div>"));
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    $("#listStage").append($("<div class='item'><div class='ui fluid child checkbox'><input type='checkbox' name=" + value.Id + "><label>" + value.Name + "</label></div></div>"));
+                }
             });
         },
         error: function () {
             alert("Error occurred while loading Stages.");
+        }
+    });
+}
+
+function GetUserStages(userid)
+{
+    $.ajax({
+        url: 'http://61.0.225.169/KPCTApi/api/Account/GetUserStages/' + userid,
+        type: 'GET',
+        data: '{}',
+        dataType: 'json',
+        async: false,
+        success: function (data){
+            if(data.length > 0)
+            {
+                $("#listStage").empty();
+                for(var i = 0; i < data.length; i++)
+                    usrStages.push(data[i]);
+            }
         }
     });
 }

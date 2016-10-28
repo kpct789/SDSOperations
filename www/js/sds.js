@@ -211,9 +211,9 @@ $(document).ready(function () {
                 },
                 error: function (xhr, status, error) {
                     alert('Error occurred while saving the data.\n\r' + xhr.responseText);
-                    $btn.html("<i class='fa fa-check'></i> Submit");
+                    $btn.html("<i class='fa fa-check'></i> " + $("#hidNewStatus").val());
                     $btn.attr('disabled', false);
-                    $btn.attr('class', 'btn btn-custom-icon');
+                    $btn.attr('class', 'btn btn-custom');
                 }
             });
         }
@@ -286,7 +286,6 @@ function GetTruckDetails(truckno)
                     $("#txtstatus").attr('class', 'text-success');
                     $("#btnSubmit").show();
                     $("#btnClear").show();
-                    /*$("#btnSubmit").html("<i class='fa fa-check'></i> " + result[0].NextStatus);*/
                     $("#hidtrkstatus").val(result[0].NextStatus);
                     $("#btnSubmit").attr('disabled', false);
                     $("#btnSubmit").attr('class', 'btn btn-custom');
