@@ -29,7 +29,7 @@
 
 body {
     /*margin-top: 65px;*/
-    font-family: 'Work+Sans', sans-serif;
+    font-family: 'Ubuntu', sans-serif;
     font-size: 13px;
 }
 
@@ -136,7 +136,7 @@ input[type="button"]:focus{
 .page-header {
     padding: 0;
     border-bottom: 1px solid #bdbdbd;
-    font-family: Work+Sans;
+    font-family: Ubuntu;
     font-size: 18px;
     color: #e74c3c;
     text-shadow: 1px 1px 2px #b4b4b4;
@@ -147,7 +147,7 @@ input[type="button"]:focus{
     border: none;
     border-bottom: 2px solid #e1e1e1;
     font-size: 13px;
-    font-family: 'Work+Sans', sans-serif;
+    font-family: 'Ubuntu', sans-serif;
     width: 100%;
     padding: 10px;
     outline: none;
@@ -171,7 +171,7 @@ input[type="button"]:focus{
     border: none;
     border-bottom: 1px solid #e1e1e1;
     font-size: 13px;
-    font-family: 'Work+Sans', sans-serif;
+    font-family: 'Ubuntu', sans-serif;
     width: 100%;
     padding: 3px;
     padding-right: 8px;
@@ -196,7 +196,7 @@ input[type="button"]:focus{
     border: none;
     border-bottom: 1px solid #e1e1e1;
     font-size: 13px;
-    font-family: 'Work+Sans', sans-serif;
+    font-family: 'Ubuntu', sans-serif;
     width: 100%;
     padding: 10px;
     outline: none;
@@ -208,7 +208,7 @@ input[type="button"]:focus{
     border: none;
     border-bottom: 1px solid #e1e1e1;
     font-size: 13px;
-    font-family: 'Work+Sans', sans-serif;
+    font-family: 'Ubuntu', sans-serif;
     width: 100%;
     padding: 3px;
     outline: none;
@@ -308,7 +308,7 @@ input[type="button"]:focus{
 #selCountryCode{
     border: none;
     background-color: transparent;
-    font-family: 'Work+Sans', sans-serif;
+    font-family: 'Ubuntu', sans-serif;
 }
 
 ::-webkit-input-placeholder {

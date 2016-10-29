@@ -244,13 +244,21 @@ function GetUserStages(userid)
             else $("#btnSubmit").attr('disabled', true);
         }
     });
-
+    debugger;
     var obj = $("#hidNewStatus").val();
     if(obj == 'SDS ACK IN' || obj == 'SDS-OUT ACK' || obj == 'EXIT') {
         $("#btnSubmit").prop('disabled', true);
     }
     else {
         $("#selLocation").prop('disabled', true);
+    }
+
+    if($("#hidloctype").val() == 3)
+    {
+        if(obj == 'PARKING IN' || obj == 'PARKING OUT')
+            $("#btnSubmit").prop('disabled', false);
+        else
+            $("#btnSubmit").prop('disabled', true);
     }
 }
 
@@ -371,6 +379,7 @@ function ShowObjects()
 
 function DisableButton(obj, plocid, alocid)
 {
+    debugger;
     $("#lblerr").html();
     $("#btnSubmit").prop('disabled', false);
     if(obj == 'SDS ACK IN' || obj == 'SDS-OUT ACK' || obj == 'EXIT') {
