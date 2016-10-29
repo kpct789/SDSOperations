@@ -13,6 +13,7 @@ $(document).ready(function (){
     qs();
     GetUsers();
     GetStages();
+    CheckBoxEvents();
 
     $("#home").click(function () {
         $.ajax({
@@ -28,13 +29,13 @@ $(document).ready(function (){
 
     $('#seluser').dropdown();
 
-    /*$('#seluser').change(function(){
+    $('#seluser').change(function(){
         GetUserStages($(this).val().trim());
         GetStages();
-    });*/
+        CheckBoxEvents();
+    });
 
     $("#btnSubmit").click(function() {
-        debugger;
         var users = "", stages = "";
         var len = $('.list .child.checkbox').length;
         $("#seluser option:selected").each(function () {
@@ -111,7 +112,10 @@ $(document).ready(function (){
             });
         }
     });
+});
 
+function CheckBoxEvents()
+{
     $('.list .master.checkbox').checkbox({
         // check all children
         onChecked: function() {
@@ -156,7 +160,8 @@ $(document).ready(function (){
             }
         }
     });
-});
+}
+
 function GetUsers()
 {
     $("#seluser").empty();
@@ -178,8 +183,10 @@ function GetUsers()
         }
     });
 }
+
 function GetStages()
 {
+    $("#listStage").empty();
     $.ajax({
         type: "GET",
         contentType: "application/json; charset=utf-8",
@@ -188,23 +195,19 @@ function GetStages()
         data: '{}',
         async: false,
         success: function (result) {
-            $.each(result, function (key, value) {
-                if(usrStages.length > 0)
+            for(var i = 0; i < result.length; i++)
+            {
+                var checked = false;
+                for(var j = 0; j < usrStages.length; j++)
                 {
-                    for(var i = 0; i < usrStages.length; i++)
-                    {
-                        if(usrStages[i] == value.Id)
-                        {
-                            $("#listStage").append($("<div class='item'><div class='ui fluid child checkbox'><input type='checkbox' checked name=" + value.Id + "><label>" + value.Name + "</label></div></div>"));
-                            break;
-                        }
-                    }
+                    if(usrStages[j] == result[i].Id)
+                        checked = true;
                 }
+                if(checked)
+                    $("#listStage").append($("<div class='item'><div class='ui fluid child checkbox'><input type='checkbox' name=" + result[i].Id + " checked><label>" + result[i].Name + "</label></div></div>"));
                 else
-                {
-                    $("#listStage").append($("<div class='item'><div class='ui fluid child checkbox'><input type='checkbox' name=" + value.Id + "><label>" + value.Name + "</label></div></div>"));
-                }
-            });
+                    $("#listStage").append($("<div class='item'><div class='ui fluid child checkbox'><input type='checkbox' name=" + result[i].Id + "><label>" + result[i].Name + "</label></div></div>"));
+            }
         },
         error: function () {
             alert("Error occurred while loading Stages.");
@@ -214,6 +217,7 @@ function GetStages()
 
 function GetUserStages(userid)
 {
+    usrStages = [];
     $.ajax({
         url: 'http://61.0.225.169/KPCTApi/api/Account/GetUserStages/' + userid,
         type: 'GET',
@@ -230,6 +234,7 @@ function GetUserStages(userid)
         }
     });
 }
+
 function qs() {
     var query = window.location.search.substring(1);
     var parms = query.split('&');
