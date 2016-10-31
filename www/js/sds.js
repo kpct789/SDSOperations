@@ -244,9 +244,12 @@ function GetUserStages(userid)
             else $("#btnSubmit").attr('disabled', true);
         }
     });
-    debugger;
+
     var obj = $("#hidNewStatus").val();
     if(obj == 'SDS ACK IN' || obj == 'SDS-OUT ACK' || obj == 'EXIT') {
+        $("#btnSubmit").prop('disabled', true);
+    }
+    else if(obj == '') {
         $("#btnSubmit").prop('disabled', true);
     }
     else {
@@ -301,6 +304,8 @@ function GetTruckDetails(truckno)
                         $("#btnSubmit").html("<i class='fa fa-check'></i> Tally Sheet");
                     else if($("#hidStatusId").val() == 5 && $("#hidloctype").val() == 2 && $("#hidNewStatus").val() == "ACTIVITY END")
                         $("#btnSubmit").html("<i class='fa fa-check'></i> Tally Sheet");
+                    else if(result[0].NextStatus == "")
+                        $("#btnSubmit").attr('disabled', true);
                     else
                         $("#btnSubmit").html("<i class='fa fa-check'></i> " + result[0].NextStatus);
                     DisableButton(result[0].NextStatus, result[0].LocType, $("#hidloctype").val());
@@ -379,10 +384,12 @@ function ShowObjects()
 
 function DisableButton(obj, plocid, alocid)
 {
-    debugger;
     $("#lblerr").html();
     $("#btnSubmit").prop('disabled', false);
     if(obj == 'SDS ACK IN' || obj == 'SDS-OUT ACK' || obj == 'EXIT') {
+        $("#btnSubmit").prop('disabled', true);
+    }
+    else if(obj == '') {
         $("#btnSubmit").prop('disabled', true);
     }
     else {
