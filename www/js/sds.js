@@ -169,6 +169,7 @@ $(document).ready(function () {
         }
         else*/ if(oldvalue != $("#hidNewStatus").val())
         {
+            $("#btnSubmit").attr('disabled', true);
             alert('Truck status has been changed. Please check once again.');
             return false;
         }
