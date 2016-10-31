@@ -1,4 +1,4 @@
-var qsParm = new Array();
+var qsParm = new Array(), oldvalue = "";
 document.addEventListener("deviceready", onDeviceReady, false);
 
 function onDeviceReady() {
@@ -126,6 +126,7 @@ $(document).ready(function () {
             $("#txttruckno").focus();
             return false;
         }*/
+        oldvalue = "";
         GetDeviceStatus();
         GetTruckDetails($("#txttruckno").val().trim());
         Reason();
@@ -161,11 +162,17 @@ $(document).ready(function () {
 
     $("#btnSubmit").click(function (){
         var $btn = $("#btnSubmit");
+        GetTruckDetails($("#txttruckno").val());
         /*if(LocationValidations() == false)
         {
             return false;
         }
-        else*/ if($("#hidStatusId").val() == 5 && $("#hidloctype").val() == 2 && $("#hidNewStatus").val() == "ACTIVITY END")
+        else*/ if(oldvalue != $("#hidNewStatus").val())
+        {
+            alert('Truck status has been changed. Please check once again.');
+            return false;
+        }
+        else if($("#hidStatusId").val() == 5 && $("#hidloctype").val() == 2 && $("#hidNewStatus").val() == "ACTIVITY END")
         {
             window.location.href = 'TallySheet.html?user=' + btoa($("#hidusrid").val()) + '&trkid=' + btoa($("#hidTruckId").val()) + '&trkno=' + btoa($("#txttruckno").val().trim()) + '&loctype=' + btoa($("#hidloctype").val()) + '';
         }
@@ -245,24 +252,10 @@ function GetUserStages(userid)
         }
     });
 
-    var obj = $("#hidNewStatus").val();
-    if(obj == 'SDS ACK IN' || obj == 'SDS-OUT ACK' || obj == 'EXIT') {
-        $("#btnSubmit").prop('disabled', true);
-    }
-    else if(obj == '') {
-        $("#btnSubmit").prop('disabled', true);
-    }
-    else {
-        $("#selLocation").prop('disabled', true);
-    }
+    var obj = $("#hidNewStatus").val(),
+        alocid = $("#hidloctype").val();
 
-    if($("#hidloctype").val() == 3)
-    {
-        if(obj == 'PARKING IN' || obj == 'PARKING OUT')
-            $("#btnSubmit").prop('disabled', false);
-        else
-            $("#btnSubmit").prop('disabled', true);
-    }
+    DisableButton(obj, '', alocid);
 }
 
 function GetTruckDetails(truckno)
@@ -298,8 +291,11 @@ function GetTruckDetails(truckno)
                     $("#btnSubmit").show();
                     $("#btnClear").show();
                     $("#hidtrkstatus").val(result[0].NextStatus);
+                    if(oldvalue == "")
+                        oldvalue = result[0].NextStatus;
                     $("#btnSubmit").attr('disabled', false);
                     $("#btnSubmit").attr('class', 'btn btn-custom');
+                    $("#btnSubmit").html("<i class='fa fa-check'></i>");
                     if($("#hidStatusId").val() == 5 && $("#hidloctype").val() == 1 && $("#hidNewStatus").val() == "ACTIVITY END")
                         $("#btnSubmit").html("<i class='fa fa-check'></i> Tally Sheet");
                     else if($("#hidStatusId").val() == 5 && $("#hidloctype").val() == 2 && $("#hidNewStatus").val() == "ACTIVITY END")
