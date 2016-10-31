@@ -170,7 +170,7 @@ $(document).ready(function () {
         else*/ if(oldvalue != $("#hidNewStatus").val())
         {
             $("#btnSubmit").attr('disabled', true);
-            alert('Truck status has been changed. Please check once again.');
+            alert('Truck status has been changed. Please search once again.');
             return false;
         }
         else if($("#hidStatusId").val() == 5 && $("#hidloctype").val() == 2 && $("#hidNewStatus").val() == "ACTIVITY END")
