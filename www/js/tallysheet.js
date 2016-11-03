@@ -149,7 +149,8 @@ $(document).ready(function (){
                         Qty : total,
                         Location : loc,
                         LocationType : $("#hidloctype").val(),
-                        User : $("#hidusrid").val()
+                        User : $("#hidusrid").val(),
+                        Container_No : $("#txtcontainerno").val()
                     };
                     Adddata.push(obj);
                 }
