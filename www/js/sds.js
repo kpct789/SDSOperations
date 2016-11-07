@@ -99,6 +99,7 @@ $(document).ready(function () {
     Reason();
 
     $("#home").click(function () {
+        $("#loading").show();
         $.ajax({
             type: "GET",
             url: "http://61.0.225.169/KPCTApi/api/Account/GetUserScreens/" + $("#hidusrid").val(),
@@ -135,6 +136,7 @@ $(document).ready(function () {
     });
 
     $("#imgScan").click(function () {
+        $("#loading").show();
         $("#txtparty").val("");
         $("#txtloc").val("");
         $("#txtcargo").val("");
