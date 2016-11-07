@@ -161,6 +161,7 @@ $(document).ready(function () {
     });
 
     $("#btnSubmit").click(function (){
+        debugger;
         var $btn = $("#btnSubmit");
         GetTruckDetails($("#txttruckno").val());
         /*if(LocationValidations() == false)
@@ -170,6 +171,7 @@ $(document).ready(function () {
         else*/ if(oldvalue != $("#hidNewStatus").val())
         {
             $("#btnSubmit").attr('disabled', true);
+            $btn.html("<i class='fa fa-check'></i> " + oldvalue);
             alert('Truck status has been changed. Please search once again.');
             return false;
         }
