@@ -5,7 +5,7 @@ function onDeviceReady() {
     document.addEventListener("backbutton", onBackKeyDown, false);
     $("#hiduuid").val(device.uuid);
     window.plugins.imeiplugin.getImei(callback);
-    nfc.enabled(function(){
+    /*nfc.enabled(function(){
         lblerr.innerHTML = "Tap nfc tag to read";
         nfc.addNdefListener(
             function (record){
@@ -46,7 +46,7 @@ function onDeviceReady() {
     },
     function(){
         lblerr.innerHTML = "";
-    });
+    });*/
 }
 function onBackKeyDown() {
 }
