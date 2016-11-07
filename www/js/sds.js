@@ -112,7 +112,6 @@ $(document).ready(function () {
     });
 
     $("#imgSearch").click(function () {
-        debugger;
         $("#loading").show();
         $("#imgtruck").hide();
         $("#txtparty").val("");
@@ -305,7 +304,7 @@ function GetTruckDetails(truckno)
                         $("#btnSubmit").html("<i class='fa fa-check'></i> Tally Sheet");
                     else if($("#hidStatusId").val() == 5 && $("#hidloctype").val() == 2 && $("#hidNewStatus").val() == "ACTIVITY END")
                         $("#btnSubmit").html("<i class='fa fa-check'></i> Tally Sheet");
-                    else if(result[0].NextStatus == "")
+                    else if(result[0].NextStatus == "" || $("#hidloctype").val() == "" || $("#hidloctype").val() == "--" || $("#hidStatusId").val() == "")
                         $("#btnSubmit").attr('disabled', true);
                     else
                         $("#btnSubmit").html("<i class='fa fa-check'></i> " + result[0].NextStatus);
@@ -413,6 +412,9 @@ function DisableButton(obj, plocid, alocid)
         else
             $("#btnSubmit").prop('disabled', true);
     }
+
+    if(alocid == '--')
+        $("#btnSubmit").prop('disabled', true);
 }
 
 function scan()
