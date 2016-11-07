@@ -161,7 +161,6 @@ $(document).ready(function () {
     });
 
     $("#btnSubmit").click(function (){
-        debugger;
         var $btn = $("#btnSubmit");
         GetTruckDetails($("#txttruckno").val());
         /*if(LocationValidations() == false)
