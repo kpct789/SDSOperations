@@ -112,6 +112,7 @@ $(document).ready(function () {
     });
 
     $("#imgSearch").click(function () {
+        debugger;
         $("#loading").show();
         $("#imgtruck").hide();
         $("#txtparty").val("");
