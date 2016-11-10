@@ -297,7 +297,7 @@ function GetHandledCompany()
 }
 function Validations()
 {
-    var loc = "", cargo = "", weather = "", hndledcomp = "", hndledtype = "", total = 0;
+    var loc = "", cargo = "", weather = "", hndledcomp = "", hndledtype = "", total = 0, operation = 0;
     $("#selloc option:selected").each(function () {
         loc += $(this).val();
     });
@@ -319,6 +319,7 @@ function Validations()
     });
 
     total = $('#tbldata tfoot tr td:eq(2)').find("input").val();
+    operation = $("input[type='radio']:checked").val();
 
     if(loc == 0)
     {
@@ -358,6 +359,15 @@ function Validations()
         else if($("#tbldata tbody tr:eq(0) td:eq(3)").find("input").val() == "")
             $("#tbldata tbody tr:eq(0) td:eq(3)").find("input").focus();
         return false;
+    }
+    else if(operation == 1)
+    {
+        if($("#txtcontainerno").val() == "")
+        {
+            alert('Please Enter Container No.');
+            $("#txtcontainerno").focus();
+            return false;
+        }
     }
 
     return true;
