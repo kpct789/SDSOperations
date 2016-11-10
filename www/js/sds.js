@@ -159,6 +159,7 @@ $(document).ready(function () {
     });
 
     $("#btnClear").click(function (){
+        $("#loading").show();
         window.location.href = 'SDS.html?user=' + btoa($("#hidusrid").val());
     });
 
