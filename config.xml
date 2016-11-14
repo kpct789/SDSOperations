@@ -47,7 +47,8 @@
     <!--<plugin spec="https://github.com/hypery2k/cordova-barcodescanner-plugin.git" source="git" />-->
     <plugin name="cordova-plugin-barcodescanner" source="npm" />
   <gap:plugin name="com.phonegap.plugin.statusbar" />
-  <plugin name="com.joandilee.imeiplugin" source="pgb" />
+  <!--<plugin name="com.joandilee.imeiplugin" source="pgb" />-->
+    <plugin name="imeiplugin" source="npm" />
   <plugin name="phonegap-nfc" spec="0.6.6" />
   <plugin name="cordova-plugin-whitelist" />
   <icon src="icon.png"/>
