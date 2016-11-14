@@ -43,8 +43,8 @@
   <gap:plugin name="org.apache.cordova.network-information"/>
   <gap:plugin name="org.apache.cordova.splashscreen"/>
   <gap:plugin name="org.apache.cordova.vibration"/>
-  <!--<gap:plugin name="com.phonegap.plugins.barcodescanner" />-->
-    <plugin spec="https://github.com/hypery2k/cordova-barcodescanner-plugin.git" source="git" />
+  <gap:plugin name="com.phonegap.plugins.barcodescanner" />
+    <!--<plugin spec="https://github.com/hypery2k/cordova-barcodescanner-plugin.git" source="git" />-->
   <gap:plugin name="com.phonegap.plugin.statusbar" />
   <plugin name="com.joandilee.imeiplugin" source="pgb" />
   <plugin name="phonegap-nfc" spec="0.6.6" />
