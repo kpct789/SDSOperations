@@ -102,6 +102,10 @@ $(document).ready(function (){
             return false;
         }
     });
+    
+    $("#imgAddSign").click(function(){
+        window.location.href = 'Capture.html?user=' + btoa($("#hidusrid").val()) + '&trkid=' + btoa($("#hidTruckId").val()) + '&trkno=' + btoa($("#txttruckno").val().trim()) + '&loctype=' + btoa($("#hidloctype").val()) + '';
+    });
 
     $("#btnSubmit").click(function (){
         var $btn = $("#btnSubmit");
@@ -184,17 +188,35 @@ function qs() {
             qsParm[key] = val;
         }
     }
-
-    if (parms.length > 0 && query != "") {
-        $("#hidusrid").val(atob(qsParm["user"]));
-        $("#hidtrkid").val(atob(qsParm["trkid"]));
-        $("#txttruckno").val(atob(qsParm["trkno"]));
-        $("#hidloctype").val(atob(qsParm["loctype"]));
-        return true;
+    
+    if(qsParm.hasOwnProperty("sign"))
+    {
+        if (parms.length > 0 && query != "") {
+            $("#hidusrid").val(atob(qsParm["user"]));
+            $("#hidtrkid").val(atob(qsParm["trkid"]));
+            $("#txttruckno").val(atob(qsParm["trkno"]));
+            $("#hidloctype").val(atob(qsParm["loctype"]));
+            $("#loadImg").attr('src', atob(qsParm["sign"]));
+            return true;
+        }
+        else {
+            window.location.href = 'Login.html';
+            return false;
+        }
     }
-    else {
-        window.location.href = 'Login.html';
-        return false;
+    else
+    {
+        if (parms.length > 0 && query != "") {
+            $("#hidusrid").val(atob(qsParm["user"]));
+            $("#hidtrkid").val(atob(qsParm["trkid"]));
+            $("#txttruckno").val(atob(qsParm["trkno"]));
+            $("#hidloctype").val(atob(qsParm["loctype"]));
+            return true;
+        }
+        else {
+            window.location.href = 'Login.html';
+            return false;
+        }
     }
 }
 
