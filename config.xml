@@ -45,7 +45,11 @@
     <gap:plugin name="org.apache.cordova.media"/>
     <gap:plugin name="org.apache.cordova.network-information"/>
     <gap:plugin name="org.apache.cordova.splashscreen"/>
-    <gap:plugin name="org.apache.cordova.vibration"/>-->
+    <gap:plugin name="org.apache.cordova.vibration"/>
+    <plugin name="cordova-plugin-whitelist" version="1"/>
+    <plugin name="com.simonmacdonald.telephonenumber" source="pgb" />
+    <plugin name="com.sharinglabs.cordova.plugin.cache" source="pgb" />
+    <plugin name="com.cordova.plugins.sms" spec="0.1.1" source="pgb" />-->
 
     <plugin name="cordova-plugin-geolocation" source="npm" />
     <!--<gap:plugin name="org.apache.cordova.geolocation"/>-->
@@ -108,11 +112,6 @@
 
     <gap:splash src="www/res/screen/windows-phone/screen-portrait.jpg" gap:platform="winphone"/>
     <access origin="*"/>
-    <plugin name="cordova-plugin-whitelist" version="1"/>
-    <plugin name="com.simonmacdonald.telephonenumber" source="pgb" />
-    <!--
-    <plugin name="com.sharinglabs.cordova.plugin.cache" source="pgb" />
-    <plugin name="com.cordova.plugins.sms" spec="0.1.1" source="pgb" />-->
     <allow-intent href="http://*/*"/>
     <allow-intent href="https://*/*"/>
     <allow-intent href="tel:*"/>
