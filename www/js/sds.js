@@ -136,6 +136,7 @@ $(document).ready(function () {
     });
 
     $("#imgScan").click(function () {
+        debugger;
         $("#loading").show();
         $("#txtparty").val("");
         $("#txtloc").val("");
@@ -422,6 +423,7 @@ function scan()
 {
     cordova.plugins.barcodeScanner.scan(
         function (result) {
+            debugger;
             if (!result.cancelled) {
                 $("#txttruckno").val(result.text);
             }
