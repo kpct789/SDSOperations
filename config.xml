@@ -57,6 +57,7 @@
     <plugin name="cordova-plugin-barcodescanner" source="npm" />
     <plugin name="cordova-plugin-battery-status" source="npm" />
     <plugin name="cordova-plugin-camera" source="npm" />
+    <plugin name="cordova-plugin-device" source="npm" />
     <plugin name="cordova-plugin-geolocation" source="npm" />
     <plugin name="cordova-plugin-statusbar" source="npm" />
     <plugin name="cordova-plugin-whitelist" source="npm" />
