@@ -422,16 +422,15 @@ function scan()
 {
     cordova.plugins.barcodeScanner.scan(
         function (result) {
-            debugger;
             if (!result.cancelled) {
                 $("#txttruckno").val(result.text);
             }
         },
         function (error) {
-            debugger;
             alert("Scanning failed: " + error);
         }
     );
+    $("#loading").hide();
 }
 
 function LocationValidations()
