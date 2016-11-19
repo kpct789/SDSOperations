@@ -128,7 +128,7 @@ $(document).ready(function (){
         total = $('#tbldata tfoot tr td:eq(2)').find("input").val();
         operation = $("input[type='radio']:checked").val();
 
-        window.location.href = 'Capture.html?user=' + btoa($("#hidusrid").val()) + '&trkid=' + btoa($("#hidTruckId").val()) + '&trkno=' + btoa($("#txttruckno").val().trim()) + '&loctype=' + btoa($("#hidloctype").val()) + '&loc=' + loc + '&cargo=' + cargo + '&weather=' + weather
+        window.location.href = 'Capture.html?user=' + btoa($("#hidusrid").val()) + '&trkid=' + btoa($("#hidtrkid").val()) + '&trkno=' + btoa($("#txttruckno").val().trim()) + '&loctype=' + btoa($("#hidloctype").val()) + '&loc=' + loc + '&cargo=' + cargo + '&weather=' + weather
             + '&hndledcomp=' + hndledcomp + '&hndledtype=' + hndledtype + '&container=' + btoa($("#txtcontainerno").val()) + '&operation=' + operation;
     });
 
@@ -185,7 +185,7 @@ $(document).ready(function (){
                     Adddata.push(obj);
                 }
             });
-            //debugger;
+
             $.ajax({
                 type: 'POST',
                 url: 'http://202.83.27.199/KPCTApi/api/TallySheet/AddData',
@@ -253,7 +253,9 @@ function qs2() {
             $("#selweather option[value=" + qsParm["weather"] + "]").attr('selected', 'selected');
             $("#selhndcomp option[value=" + qsParm["hndledcomp"] + "]").attr('selected', 'selected');
             $("#selhndtype option[text=" + qsParm["hndledtype"] + "]").attr('selected', 'selected');
-            $("#txtcontainerno").val(atob(qsParm["container"]));
+            if(atob(qsParm["container"]) != "UNDEFINED")
+                $("#txtcontainerno").val(atob(qsParm["container"]));
+            else $("#txtcontainerno").val();
             $("input:radio[name='operation'][value='" + qsParm["operation"] + "']").attr("checked", true);
             return true;
         }

@@ -114,11 +114,9 @@ $("#txtIdNo").keydown(function (objEvt) {
 });
 //This section of script is used to center the html element
 function centerLoadingPanel() {
-    //debugger;
     centerElementOnScreen($("#divloading"));
 }
 function centerElementOnScreen(element) {
-    //debugger;
     var scrollTop = document.body.scrollTop;
     var scrollLeft = document.body.scrollLeft;
     var viewPortHeight = document.body.clientHeight;

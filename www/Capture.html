@@ -69,7 +69,7 @@
                     data: { ImageData: imageData },
                     dataType: "json",
                     success: function (result) {
-                        window.location.href = 'TallySheet.html?user=' + btoa($("#hidusrid").val()) + '&trkid=' + btoa($("#hidTruckId").val()) + '&trkno=' + btoa($("#hidtruckno").val()) + '&loctype=' + btoa($("#hidloctype").val()) + '&sign=' + btoa("http://202.83.27.199/KPCTApi/Upload/" + result) + '&loc=' + loc + '&cargo=' + cargo + '&weather=' + weather + '&hndledcomp=' + hndledcomp + '&hndledtype=' + hndledtype + '&container=' + btoa(container) + '&operation=' + operation;
+                        window.location.href = 'TallySheet.html?user=' + btoa($("#hidusrid").val()) + '&trkid=' + btoa($("#hidtrkid").val()) + '&trkno=' + btoa($("#hidtruckno").val()) + '&loctype=' + btoa($("#hidloctype").val()) + '&sign=' + btoa("http://202.83.27.199/KPCTApi/Upload/" + result) + '&loc=' + loc + '&cargo=' + cargo + '&weather=' + weather + '&hndledcomp=' + hndledcomp + '&hndledtype=' + hndledtype + '&container=' + btoa(container) + '&operation=' + operation;
                     },
                     error: function (xhr, status, error) {
                         alert('Error occurred while saving the data.\n\r' + xhr.responseText);
