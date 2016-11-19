@@ -234,6 +234,8 @@ $(document).ready(function () {
 
 function GetUserStages(userid)
 {
+    var obj = $("#hidNewStatus").val(),
+        alocid = $("#hidloctype").val();
     $.ajax({
         url: 'http://202.83.27.199/KPCTApi/api/Account/GetUserStages/' + userid,
         type: 'GET',
@@ -248,6 +250,7 @@ function GetUserStages(userid)
                     if($("#hidStatusId").val() == data[i])
                     {
                         $("#btnSubmit").attr('disabled', false);
+                        DisableButton(obj, '', alocid);
                         break;
                     }
                     else $("#btnSubmit").attr('disabled', true);
@@ -256,11 +259,6 @@ function GetUserStages(userid)
             else $("#btnSubmit").attr('disabled', true);
         }
     });
-
-    var obj = $("#hidNewStatus").val(),
-        alocid = $("#hidloctype").val();
-
-    DisableButton(obj, '', alocid);
 }
 
 function GetTruckDetails(truckno)
