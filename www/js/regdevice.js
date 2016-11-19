@@ -4,7 +4,7 @@ document.addEventListener("deviceready", onDeviceReady, false);
 function onDeviceReady() {
     document.addEventListener("backbutton", onBackKeyDown, false);
     debugger;
-    $("#txtuuid").val(device.uuid);
+    //$("#txtuuid").val(device.uuid);
     window.plugins.imeiplugin.getImei(callback);
 }
 function callback(imei) {
