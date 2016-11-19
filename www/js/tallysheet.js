@@ -24,6 +24,7 @@ $(document).ready(function (){
     GetWeatherCondition();
     GetHandledCompany();
     GetLocations();
+    qs2();
 
     $("#add").click(function(){
         var headrowCount = $("#tbldata thead tr").length;
@@ -104,14 +105,38 @@ $(document).ready(function (){
     });
     
     $("#imgAddSign").click(function(){
-        window.location.href = 'Capture.html?user=' + btoa($("#hidusrid").val()) + '&trkid=' + btoa($("#hidTruckId").val()) + '&trkno=' + btoa($("#txttruckno").val().trim()) + '&loctype=' + btoa($("#hidloctype").val()) + '';
+        var loc = "", cargo = "", weather = "", hndledcomp = "", hndledtype = "", total = 0, operation = "";
+
+        $("#selloc option:selected").each(function () {
+            loc += $(this).val();
+        });
+        $("#selcargo option:selected").each(function () {
+            cargo += $(this).val();
+        });
+
+        $("#selweather option:selected").each(function () {
+            weather += $(this).val();
+        });
+
+        $("#selhndcomp option:selected").each(function () {
+            hndledcomp += $(this).val();
+        });
+
+        $("#selhndtype option:selected").each(function () {
+            hndledtype += $(this).text().trim();
+        });
+        total = $('#tbldata tfoot tr td:eq(2)').find("input").val();
+        operation = $("input[type='radio']:checked").val();
+
+        window.location.href = 'Capture.html?user=' + btoa($("#hidusrid").val()) + '&trkid=' + btoa($("#hidTruckId").val()) + '&trkno=' + btoa($("#txttruckno").val().trim()) + '&loctype=' + btoa($("#hidloctype").val()) + '&loc=' + loc + '&cargo=' + cargo + '&weather=' + weather
+            + '&hndledcomp=' + hndledcomp + '&hndledtype=' + hndledtype + '&container=' + btoa($("#txtcontainerno").val()) + '&operation=' + operation;
     });
 
     $("#btnSubmit").click(function (){
         var $btn = $("#btnSubmit");
         if(Validations())
         {
-            var loc = "", cargo = "", weather = "", hndledcomp = "", hndledtype = "", total = 0;
+            var loc = "", cargo = "", weather = "", hndledcomp = "", hndledtype = "", total = 0, operation = "";
             $btn.find("i.fa").attr('class', 'fa fa-spinner fa-spin fa-lg');
             $btn.find("span").text("data is submitting please wait...");
             $btn.attr('disabled', true);
@@ -136,6 +161,7 @@ $(document).ready(function (){
             });
 
             total = $('#tbldata tfoot tr td:eq(2)').find("input").val();
+            operation = $("input[type='radio']:checked").val();
 
             var Adddata = [];
             $("#tbldata tbody tr").each(function () {
@@ -189,6 +215,31 @@ function qs() {
         }
     }
     
+    if (parms.length > 0 && query != "") {
+        $("#hidusrid").val(atob(qsParm["user"]));
+        $("#hidtrkid").val(atob(qsParm["trkid"]));
+        $("#txttruckno").val(atob(qsParm["trkno"]));
+        $("#hidloctype").val(atob(qsParm["loctype"]));
+        return true;
+    }
+    else {
+        window.location.href = 'Login.html';
+        return false;
+    }
+}
+
+function qs2() {
+    var query = window.location.search.substring(1);
+    var parms = query.split('&');
+    for (var i = 0; i < parms.length; i++) {
+        var pos = parms[i].indexOf('=');
+        if (pos > 0) {
+            var key = parms[i].substring(0, pos);
+            var val = parms[i].substring(pos + 1);
+            qsParm[key] = val;
+        }
+    }
+
     if(qsParm.hasOwnProperty("sign"))
     {
         if (parms.length > 0 && query != "") {
@@ -197,20 +248,13 @@ function qs() {
             $("#txttruckno").val(atob(qsParm["trkno"]));
             $("#hidloctype").val(atob(qsParm["loctype"]));
             $("#loadImg").attr('src', atob(qsParm["sign"]));
-            return true;
-        }
-        else {
-            window.location.href = 'Login.html';
-            return false;
-        }
-    }
-    else
-    {
-        if (parms.length > 0 && query != "") {
-            $("#hidusrid").val(atob(qsParm["user"]));
-            $("#hidtrkid").val(atob(qsParm["trkid"]));
-            $("#txttruckno").val(atob(qsParm["trkno"]));
-            $("#hidloctype").val(atob(qsParm["loctype"]));
+            $("#selloc option[value=" + qsParm["loc"] + "]").attr('selected', 'selected');
+            $("#selcargo option[value=" + qsParm["cargo"] + "]").attr('selected', 'selected');
+            $("#selweather option[value=" + qsParm["weather"] + "]").attr('selected', 'selected');
+            $("#selhndcomp option[value=" + qsParm["hndledcomp"] + "]").attr('selected', 'selected');
+            $("#selhndtype option[text=" + qsParm["hndledtype"] + "]").attr('selected', 'selected');
+            $("#txtcontainerno").val(atob(qsParm["container"]));
+            $("input:radio[name='operation'][value='" + qsParm["operation"] + "']").attr("checked", true);
             return true;
         }
         else {

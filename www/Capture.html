@@ -51,11 +51,12 @@
         <input type="hidden" id="hidloctype">
 	</body>
 </html>
-<script src="js/jquery1.11.1-min.js" type="text/javascript" ></script>
+<script src="js/jquery-1.10.2.js" type="text/javascript" ></script>
 <script src="js/jquery.jqscribble.js" type="text/javascript"></script>
 <script src="js/jqscribble.extrabrushes.js" type="text/javascript"></script>
 <script type="text/javascript">
     var qsParm = new Array();
+    var loc = "", cargo = "", weather = "", hndledcomp = "", hndledtype = "", total = 0, operation = "", container = "";
     function save()
     {
         $("#test").data("jqScribble").save(function(imageData)
@@ -68,7 +69,7 @@
                     data: { ImageData: imageData },
                     dataType: "json",
                     success: function (result) {
-                        window.location.href = 'TallySheet.html?user=' + btoa($("#hidusrid").val()) + '&trkid=' + btoa($("#hidTruckId").val()) + '&trkno=' + btoa($("#hidtruckno").val()) + '&loctype=' + btoa($("#hidloctype").val()) + '&sign=' + btoa("http://202.83.27.199/KPCTApi/Upload/" + result);
+                        window.location.href = 'TallySheet.html?user=' + btoa($("#hidusrid").val()) + '&trkid=' + btoa($("#hidTruckId").val()) + '&trkno=' + btoa($("#hidtruckno").val()) + '&loctype=' + btoa($("#hidloctype").val()) + '&sign=' + btoa("http://202.83.27.199/KPCTApi/Upload/" + result) + '&loc=' + loc + '&cargo=' + cargo + '&weather=' + weather + '&hndledcomp=' + hndledcomp + '&hndledtype=' + hndledtype + '&container=' + btoa(container) + '&operation=' + operation;
                     },
                     error: function (xhr, status, error) {
                         alert('Error occurred while saving the data.\n\r' + xhr.responseText);
@@ -94,6 +95,13 @@
             $("#hidtrkid").val(atob(qsParm["trkid"]));
             $("#hidtruckno").val(atob(qsParm["trkno"]));
             $("#hidloctype").val(atob(qsParm["loctype"]));
+            loc = qsParm["loc"];
+            cargo = qsParm["cargo"];
+            weather = qsParm["weather"];
+            hndledcomp = qsParm["hndledcomp"];
+            hndledtype = qsParm["hndledtype"];
+            operation = qsParm["operation"];
+            container = atob(qsParm["container"]);
             return true;
         }
         else {
@@ -106,7 +114,7 @@
         qs();
         $("#test").jqScribble();
         $("#btnClear").click(function(){
-            window.location.href = 'Capture.html?user=' + btoa($("#hidusrid").val()) + '&trkid=' + btoa($("#hidTruckId").val()) + '&trkno=' + btoa($("#hidtruckno").val()) + '&loctype=' + btoa($("#hidloctype").val()) + '';
+            window.location.href = 'Capture.html?user=' + btoa($("#hidusrid").val()) + '&trkid=' + btoa($("#hidTruckId").val()) + '&trkno=' + btoa($("#hidtruckno").val()) + '&loctype=' + btoa($("#hidloctype").val()) + '&loc=' + loc + '&cargo=' + cargo + '&weather=' + weather + '&hndledcomp=' + hndledcomp + '&hndledtype=' + hndledtype + '&container=' + btoa($("#txtcontainerno").val()) + '&operation=' + operation;
         });
     });
 </script>
