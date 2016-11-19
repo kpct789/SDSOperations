@@ -159,7 +159,7 @@ $(document).ready(function (){
                     Adddata.push(obj);
                 }
             });
-
+            debugger;
             $.ajax({
                 type: 'POST',
                 url: 'http://202.83.27.199/KPCTApi/api/TallySheet/AddData',
