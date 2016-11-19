@@ -11,7 +11,7 @@ $(document).ready(function (){
     $("#home").click(function () {
         $.ajax({
             type: "GET",
-            url: "http://61.0.225.169/KPCTApi/api/Account/GetUserScreens/" + $("#hidusrid").val(),
+            url: "http://202.83.27.199/KPCTApi/api/Account/GetUserScreens/" + $("#hidusrid").val(),
             data: '{}',
             contentType: "application/json",
             success: function(result) {
@@ -162,7 +162,7 @@ $(document).ready(function (){
 
             $.ajax({
                 type: 'POST',
-                url: 'http://61.0.225.169/KPCTApi/api/TallySheet/AddData',
+                url: 'http://202.83.27.199/KPCTApi/api/TallySheet/AddData',
                 dataType: "json",
                 contentType : "application/json",
                 data: JSON.stringify(Adddata),
@@ -239,7 +239,7 @@ function GetLocations()
     $.ajax({
         type: "GET",
         contentType: "application/json; charset=utf-8",
-        url: 'http://61.0.225.169/KPCTApi/api/Location/GetLocation/' + $("#hidloctype").val(),
+        url: 'http://202.83.27.199/KPCTApi/api/Location/GetLocation/' + $("#hidloctype").val(),
         dataType: "json",
         data: '{}',
         async: false,
@@ -261,7 +261,7 @@ function GetCargoCondition()
     $.ajax({
         type: "GET",
         contentType: "application/json; charset=utf-8",
-        url: 'http://61.0.225.169/KPCTApi/api/Masters/GetCargoCondition',
+        url: 'http://202.83.27.199/KPCTApi/api/Masters/GetCargoCondition',
         dataType: "json",
         data: '{}',
         async: false,
@@ -282,7 +282,7 @@ function GetWeatherCondition()
     $.ajax({
         type: "GET",
         contentType: "application/json; charset=utf-8",
-        url: 'http://61.0.225.169/KPCTApi/api/Masters/GetWeatherCondition',
+        url: 'http://202.83.27.199/KPCTApi/api/Masters/GetWeatherCondition',
         dataType: "json",
         data: '{}',
         async: false,
@@ -303,7 +303,7 @@ function GetHandledCompany()
     $.ajax({
         type: "GET",
         contentType: "application/json; charset=utf-8",
-        url: 'http://61.0.225.169/KPCTApi/api/Masters/GetHandledCompany',
+        url: 'http://202.83.27.199/KPCTApi/api/Masters/GetHandledCompany',
         dataType: "json",
         data: '{}',
         async: false,

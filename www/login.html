@@ -83,7 +83,7 @@
                 $("#txtpassword").attr('disabled', true);
                 $.ajax({
                     type: "GET",
-                    url: "http://61.0.225.169/KPCTApi/api/Account/ValidateUser/" + $("#txtusername").val().trim() + "/" + $("#txtpassword").val(),
+                    url: "http://202.83.27.199/KPCTApi/api/Account/ValidateUser/" + $("#txtusername").val().trim() + "/" + $("#txtpassword").val(),
                     data: '{}',
                     contentType: "application/json",
                     success: function(data) {
@@ -91,7 +91,7 @@
                             $("#hidusrid").val(data[0]);
                             $.ajax({
                                 type: "GET",
-                                url: "http://61.0.225.169/KPCTApi/api/Account/GetUserScreens/" + $("#hidusrid").val(),
+                                url: "http://202.83.27.199/KPCTApi/api/Account/GetUserScreens/" + $("#hidusrid").val(),
                                 data: '{}',
                                 contentType: "application/json",
                                 success: function(result) {

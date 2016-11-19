@@ -18,7 +18,7 @@ $(document).ready(function (){
     $("#home").click(function () {
         $.ajax({
             type: "GET",
-            url: "http://61.0.225.169/KPCTApi/api/Account/GetUserScreens/" + $("#hidusrid").val(),
+            url: "http://202.83.27.199/KPCTApi/api/Account/GetUserScreens/" + $("#hidusrid").val(),
             data: '{}',
             contentType: "application/json",
             success: function(result) {
@@ -86,7 +86,7 @@ $(document).ready(function (){
             }
             $.ajax({
                 type: 'POST',
-                url: 'http://61.0.225.169/KPCTApi/api/Account/AddUserStages',
+                url: 'http://202.83.27.199/KPCTApi/api/Account/AddUserStages',
                 dataType: "json",
                 contentType : "application/json",
                 data: JSON.stringify(Adddata),
@@ -94,7 +94,7 @@ $(document).ready(function (){
                     alert('Stages Mapped Successfully.');
                     $.ajax({
                         type: "GET",
-                        url: "http://61.0.225.169/KPCTApi/api/Account/GetUserScreens/" + $("#hidusrid").val(),
+                        url: "http://202.83.27.199/KPCTApi/api/Account/GetUserScreens/" + $("#hidusrid").val(),
                         data: '{}',
                         contentType: "application/json",
                         success: function(result) {
@@ -169,7 +169,7 @@ function GetUsers()
     $.ajax({
         type: "GET",
         contentType: "application/json; charset=utf-8",
-        url: 'http://61.0.225.169/KPCTApi/api/Account/GetUsers',
+        url: 'http://202.83.27.199/KPCTApi/api/Account/GetUsers',
         dataType: "json",
         data: '{}',
         async: false,
@@ -190,7 +190,7 @@ function GetStages()
     $.ajax({
         type: "GET",
         contentType: "application/json; charset=utf-8",
-        url: 'http://61.0.225.169/KPCTApi/api/Masters/GetStatus',
+        url: 'http://202.83.27.199/KPCTApi/api/Masters/GetStatus',
         dataType: "json",
         data: '{}',
         async: false,
@@ -219,7 +219,7 @@ function GetUserStages(userid)
 {
     usrStages = [];
     $.ajax({
-        url: 'http://61.0.225.169/KPCTApi/api/Account/GetUserStages/' + userid,
+        url: 'http://202.83.27.199/KPCTApi/api/Account/GetUserStages/' + userid,
         type: 'GET',
         data: '{}',
         dataType: 'json',

@@ -39,7 +39,7 @@ $(document).ready(function () {
     $("#home").click(function () {
         $.ajax({
             type: "GET",
-            url: "http://61.0.225.169/KPCTApi/api/Account/GetUserScreens/" + $("#hidusrid").val(),
+            url: "http://202.83.27.199/KPCTApi/api/Account/GetUserScreens/" + $("#hidusrid").val(),
             data: '{}',
             contentType: "application/json",
             success: function(result) {
@@ -68,7 +68,7 @@ $(document).ready(function () {
             Adddata.User = 'admin';
             $.ajax({
                 type: 'POST',
-                url: 'http://61.0.225.169/KPCTApi/api/Account/RegisterDevice',
+                url: 'http://202.83.27.199/KPCTApi/api/Account/RegisterDevice',
                 dataType: "json",
                 data: Adddata,
                 success: function (loctyperesult) {
@@ -94,7 +94,7 @@ function GetDeviceStatus(){
     Adddata.UUID = $("#txtuuid").val();
     $.ajax({
         type: "POST",
-        url: "http://61.0.225.169/KPCTApi/api/Account/GetDeviceStatus",
+        url: "http://202.83.27.199/KPCTApi/api/Account/GetDeviceStatus",
         dataType: "json",
         data: Adddata,
         success: function (result) {
@@ -109,7 +109,7 @@ function GetDeviceStatus(){
                 $.ajax({
                     type: "GET",
                     contentType: "application/json; charset=utf-8",
-                    url: 'http://61.0.225.169/KPCTApi/api/Location/GetLocationType/',
+                    url: 'http://202.83.27.199/KPCTApi/api/Location/GetLocationType/',
                     dataType: "json",
                     data: '{}',
                     async: false,

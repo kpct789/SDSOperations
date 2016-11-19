@@ -64,11 +64,11 @@
             {
                 $.ajax({
                     type: 'POST',
-                    url: 'http://61.0.225.169/KPCTApi/api/TallySheet/UploadSign/' + $("#hidusrid").val(),
+                    url: 'http://202.83.27.199/KPCTApi/api/TallySheet/UploadSign/' + $("#hidusrid").val(),
                     data: { ImageData: imageData },
                     dataType: "json",
                     success: function (result) {
-                        window.location.href = 'TallySheet.html?user=' + btoa($("#hidusrid").val()) + '&trkid=' + btoa($("#hidTruckId").val()) + '&trkno=' + btoa($("#hidtruckno").val()) + '&loctype=' + btoa($("#hidloctype").val()) + '&sign=' + btoa("http://61.0.225.169/KPCTApi/Upload/" + result);
+                        window.location.href = 'TallySheet.html?user=' + btoa($("#hidusrid").val()) + '&trkid=' + btoa($("#hidTruckId").val()) + '&trkno=' + btoa($("#hidtruckno").val()) + '&loctype=' + btoa($("#hidloctype").val()) + '&sign=' + btoa("http://202.83.27.199/KPCTApi/Upload/" + result);
                     },
                     error: function (xhr, status, error) {
                         alert('Error occurred while saving the data.\n\r' + xhr.responseText);

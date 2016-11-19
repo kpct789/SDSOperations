@@ -102,7 +102,7 @@ $(document).ready(function () {
         $("#loading").show();
         $.ajax({
             type: "GET",
-            url: "http://61.0.225.169/KPCTApi/api/Account/GetUserScreens/" + $("#hidusrid").val(),
+            url: "http://202.83.27.199/KPCTApi/api/Account/GetUserScreens/" + $("#hidusrid").val(),
             data: '{}',
             contentType: "application/json",
             success: function(result) {
@@ -214,7 +214,7 @@ $(document).ready(function () {
             Adddata.User = $("#hidusrid").val();
             $.ajax({
                 type: 'POST',
-                url: 'http://61.0.225.169/KPCTApi/api/TruckDetails/AddData',
+                url: 'http://202.83.27.199/KPCTApi/api/TruckDetails/AddData',
                 dataType: "json",
                 data: Adddata,
                 success: function (result) {
@@ -235,7 +235,7 @@ $(document).ready(function () {
 function GetUserStages(userid)
 {
     $.ajax({
-        url: 'http://61.0.225.169/KPCTApi/api/Account/GetUserStages/' + userid,
+        url: 'http://202.83.27.199/KPCTApi/api/Account/GetUserStages/' + userid,
         type: 'GET',
         data: '{}',
         dataType: 'json',
@@ -269,7 +269,7 @@ function GetTruckDetails(truckno)
     if(trkno != "")
     {
         $.ajax({
-            url: 'http://61.0.225.169/KPCTApi/api/TruckDetails/GetTruckDetails/' + trkno,
+            url: 'http://202.83.27.199/KPCTApi/api/TruckDetails/GetTruckDetails/' + trkno,
             type: 'GET',
             data: '{}',
             dataType: 'json',
@@ -331,7 +331,7 @@ function Reason()
     $.ajax({
         type: "GET",
         contentType: "application/json; charset=utf-8",
-        url: 'http://61.0.225.169/KPCTApi/api/Reason/GetReasons',
+        url: 'http://202.83.27.199/KPCTApi/api/Reason/GetReasons',
         dataType: "json",
         data: '{}',
         async: false,
@@ -353,7 +353,7 @@ function GetDeviceStatus()
     Adddata.UUID = $("#hiduuid").val();
     $.ajax({
         type: "POST",
-        url: 'http://61.0.225.169/KPCTApi/api/Account/GetDeviceStatus',
+        url: 'http://202.83.27.199/KPCTApi/api/Account/GetDeviceStatus',
         dataType: "json",
         data: Adddata,
         async: false,
