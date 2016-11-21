@@ -102,7 +102,7 @@ $(document).ready(function () {
         $("#loading").show();
         $.ajax({
             type: "GET",
-            url: "http://202.83.27.199/KPCTApi/api/Account/GetUserScreens/" + $("#hidusrid").val(),
+            url: "http://172.168.8.151/KPSTSDS/api/Account/GetUserScreens/" + $("#hidusrid").val(),
             data: '{}',
             contentType: "application/json",
             success: function(result) {
@@ -121,6 +121,7 @@ $(document).ready(function () {
         $("#hidTruckId").val("");
         $("#hidStatusId").val("");
         $("#txtstatus").text("");
+        $("#hidTagNo").val("");
         /*if ($("#txttruckno").val() == "") {
             alert('Please Enter Truck No.');
             $("#loading").hide();
@@ -129,7 +130,8 @@ $(document).ready(function () {
         }*/
         oldvalue = "";
         GetDeviceStatus();
-        GetTruckDetails($("#txttruckno").val().trim());
+        GetTag_TruckDetails($("#hidTagNo").val().trim());
+        /*GetTruckDetails($("#txttruckno").val().trim());*/
         Reason();
         GetUserStages($("#hidusrid").val());
         $("#loading").hide();
@@ -214,7 +216,7 @@ $(document).ready(function () {
             Adddata.User = $("#hidusrid").val();
             $.ajax({
                 type: 'POST',
-                url: 'http://202.83.27.199/KPCTApi/api/TruckDetails/AddData',
+                url: 'http://172.168.8.151/KPSTSDS/api/TruckDetails/AddData',
                 dataType: "json",
                 data: Adddata,
                 success: function (result) {
@@ -237,7 +239,7 @@ function GetUserStages(userid)
     var obj = $("#hidNewStatus").val(),
         alocid = $("#hidloctype").val();
     $.ajax({
-        url: 'http://202.83.27.199/KPCTApi/api/Account/GetUserStages/' + userid,
+        url: 'http://172.168.8.151/KPSTSDS/api/Account/GetUserStages/' + userid,
         type: 'GET',
         data: '{}',
         dataType: 'json',
@@ -267,7 +269,7 @@ function GetTruckDetails(truckno)
     if(trkno != "")
     {
         $.ajax({
-            url: 'http://202.83.27.199/KPCTApi/api/TruckDetails/GetTruckDetails/' + trkno,
+            url: 'http://172.168.8.151/KPSTSDS/api/TruckDetails/GetTruckDetails/' + trkno,
             type: 'GET',
             data: '{}',
             dataType: 'json',
@@ -325,13 +327,78 @@ function GetTruckDetails(truckno)
     }
 }
 
+function GetTag_TruckDetails(tagno)
+{
+    var TagNo = tagno == "" ? "" : tagno;
+    if(TagNo != "")
+    {
+        $.ajax({
+            url: 'http://172.168.8.151/KPSTSDS/api/TruckDetails/GetTag_TruckDetails/' + TagNo,
+            type: 'GET',
+            data: '{}',
+            dataType: 'json',
+            async: false,
+            success: function (result) {
+                if (result.length > 0) {
+                    $("#txttruckno").val(result[0].TruckNo);
+                    $("#txtparty").val(result[0].Party);
+                    $("#txtloc").val(result[0].Loc);
+                    $("#txtactloc").val(result[0].ActualLocation);
+                    $("#txtcargo").val(result[0].Cargo);
+                    $("#txtqty").val(result[0].Qty);
+                    $("#txtstatus").text(result[0].Status);
+                    $("#hidNewStatus").val(result[0].NextStatus);
+                    $("#hidTruckId").val(result[0].TruckId);
+                    $("#hidStatusId").val(result[0].StatusId);
+                    $("#hidfrstflag").val(result[0].FirstTransit_Flag);
+                    $("#hidprkngflag").val(result[0].DBParking_Flag);
+                    $("#hidscndflag").val(result[0].SecondTransit_Flag);
+                    $("#hidactlogflag").val(result[0].ActivityLoc_Flag);
+                    $("#hidsdsoutflag").val(result[0].SDSOut_Flag);
+                    $("#hidkpctoutflag").val(result[0].KPCTOut_Flag);
+                    $("#hidfnlflag").val(result[0].FinalTransit_Flag);
+                    $("#txtstatus").attr('class', 'text-success');
+                    $("#btnSubmit").show();
+                    $("#btnClear").show();
+                    $("#hidtrkstatus").val(result[0].NextStatus);
+                    if(oldvalue == "")
+                        oldvalue = result[0].NextStatus;
+                    $("#btnSubmit").attr('disabled', false);
+                    $("#btnSubmit").attr('class', 'btn btn-custom');
+                    $("#btnSubmit").html("<i class='fa fa-check'></i>");
+                    if($("#hidStatusId").val() == 5 && $("#hidloctype").val() == 1 && $("#hidNewStatus").val() == "ACTIVITY END")
+                        $("#btnSubmit").html("<i class='fa fa-check'></i> Tally Sheet");
+                    else if($("#hidStatusId").val() == 5 && $("#hidloctype").val() == 2 && $("#hidNewStatus").val() == "ACTIVITY END")
+                        $("#btnSubmit").html("<i class='fa fa-check'></i> Tally Sheet");
+                    else if(result[0].NextStatus == "" || $("#hidloctype").val() == "" || $("#hidloctype").val() == "--" || $("#hidStatusId").val() == "")
+                        $("#btnSubmit").attr('disabled', true);
+                    if($("#hidNewStatus").val() == "ACTIVITY END")
+                        $("#btnSubmit").html("<i class='fa fa-check'></i> Tally Sheet");
+                    else
+                        $("#btnSubmit").html("<i class='fa fa-check'></i> " + result[0].NextStatus);
+                    DisableButton(result[0].NextStatus, result[0].LocType, $("#hidloctype").val());
+                }
+                else {
+                    $("#txtstatus").text("No Data Found");
+                    $("#txtstatus").attr('class', 'text-danger');
+                }
+            },
+            error: function () {
+                alert('Error occurred while loading Truck details.');
+                $("#imgtruck").hide();
+                $("#loading").hide();
+            }
+        });
+    }
+}
+
 function Reason()
 {
     $("#selReason").empty();
     $.ajax({
         type: "GET",
         contentType: "application/json; charset=utf-8",
-        url: 'http://202.83.27.199/KPCTApi/api/Reason/GetReasons',
+        url: 'http://172.168.8.151/KPSTSDS/api/Reason/GetReasons',
         dataType: "json",
         data: '{}',
         async: false,
@@ -353,7 +420,7 @@ function GetDeviceStatus()
     Adddata.UUID = $("#hiduuid").val();
     $.ajax({
         type: "POST",
-        url: 'http://202.83.27.199/KPCTApi/api/Account/GetDeviceStatus',
+        url: 'http://172.168.8.151/KPSTSDS/api/Account/GetDeviceStatus',
         dataType: "json",
         data: Adddata,
         async: false,
@@ -423,7 +490,8 @@ function scan()
     cordova.plugins.barcodeScanner.scan(
         function (result) {
             if (!result.cancelled) {
-                $("#txttruckno").val(result.text);
+               /* $("#txttruckno").val(result.text);*/
+                $("#hidtagno").val(result.text);
             }
         },
         function (error) {
@@ -432,6 +500,8 @@ function scan()
     );
     $("#loading").hide();
 }
+
+
 
 function LocationValidations()
 {
