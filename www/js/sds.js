@@ -305,6 +305,8 @@ function GetTruckDetails(truckno)
                         $("#btnSubmit").html("<i class='fa fa-check'></i> Tally Sheet");
                     else if(result[0].NextStatus == "" || $("#hidloctype").val() == "" || $("#hidloctype").val() == "--" || $("#hidStatusId").val() == "")
                         $("#btnSubmit").attr('disabled', true);
+                    if($("#hidNewStatus").val() == "ACTIVITY END")
+                        $("#btnSubmit").html("<i class='fa fa-check'></i> Tally Sheet");
                     else
                         $("#btnSubmit").html("<i class='fa fa-check'></i> " + result[0].NextStatus);
                     DisableButton(result[0].NextStatus, result[0].LocType, $("#hidloctype").val());
